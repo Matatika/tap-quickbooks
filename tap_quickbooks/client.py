@@ -6,7 +6,6 @@ import decimal
 import sys
 from functools import cached_property
 from typing import TYPE_CHECKING, Any, ClassVar
-from urllib.parse import urlencode
 
 from singer_sdk import SchemaDirectory, StreamSchema
 from singer_sdk.helpers.jsonpath import extract_jsonpath
@@ -58,7 +57,10 @@ class QuickBooksPaginator(BaseOffsetPaginator):
         # Check if we got any records
         # The response keys vary by entity type, so we check all possible keys
         for key in query_response:
-            if isinstance(query_response[key], list) and len(query_response[key]) >= self._page_size:
+            if (
+                isinstance(query_response[key], list)
+                and len(query_response[key]) >= self._page_size
+            ):
                 return True
 
         return False
@@ -162,7 +164,7 @@ class QuickBooksStream(RESTStream):
         where_clause = " AND ".join(query_parts) if query_parts else ""
 
         # Build the full query
-        query = f"SELECT * FROM {self.name}"
+        query = f"SELECT * FROM {self.name}"  # noqa: S608
         if where_clause:
             query += f" WHERE {where_clause}"
 
