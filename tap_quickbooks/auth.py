@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import sys
-from typing import TYPE_CHECKING
 
 from singer_sdk.authenticators import OAuthAuthenticator, SingletonMeta
 
@@ -11,9 +10,6 @@ if sys.version_info >= (3, 12):
     from typing import override
 else:
     from typing_extensions import override
-
-if TYPE_CHECKING:
-    from singer_sdk.streams import RESTStream
 
 
 # The SingletonMeta metaclass makes your streams reuse the same authenticator instance.
@@ -23,20 +19,28 @@ class QuickBooksAuthenticator(OAuthAuthenticator, metaclass=SingletonMeta):
 
     def __init__(
         self,
-        stream: RESTStream,
-        auth_endpoint: str | None = None,
-        oauth_scopes: str | None = None,
+        client_id: str,
+        client_secret: str,
+        refresh_token: str,
+        auth_endpoint: str,
+        oauth_scopes: str,
     ) -> None:
         """Initialize the authenticator.
 
         Args:
-            stream: The stream instance.
-            auth_endpoint: The OAuth2 token endpoint.
+            client_id: OAuth2 client ID.
+            client_secret: OAuth2 client secret.
+            refresh_token: OAuth2 refresh token.
+            auth_endpoint: OAuth2 token endpoint URL.
             oauth_scopes: OAuth scopes (not used by QuickBooks).
         """
-        super().__init__(stream=stream, auth_endpoint=auth_endpoint, oauth_scopes=oauth_scopes)
-        # Store refresh_token from config during initialization
-        self._refresh_token = stream.config.get("refresh_token")
+        super().__init__(
+            client_id=client_id,
+            client_secret=client_secret,
+            auth_endpoint=auth_endpoint,
+            oauth_scopes=oauth_scopes,
+        )
+        self._refresh_token = refresh_token
 
     @override
     @property
