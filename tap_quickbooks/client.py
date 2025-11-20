@@ -79,7 +79,7 @@ class QuickBooksStream(RESTStream):
     schema: ClassVar[StreamSchema] = StreamSchema(SCHEMAS_DIR)
 
     # Most QuickBooks objects use this replication key
-    replication_key = "MetaData.LastUpdatedTime"
+    replication_key: str | None = "MetaData.LastUpdatedTime"
 
     @override
     @property
