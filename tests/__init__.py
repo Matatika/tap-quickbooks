@@ -1,1 +1,1 @@
-"""Test suite for tap-mysourcename."""
+"""Test suite for tap-quickbooks."""
