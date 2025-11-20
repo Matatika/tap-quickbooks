@@ -19,5 +19,6 @@
         "array"
       ]
     }
-  }
+  },
+  "$id": "https://github.com/Matatika/tap-quickbooks/blob/main/tap_quickbooks/schemas/CashFlowReport.json"
 }

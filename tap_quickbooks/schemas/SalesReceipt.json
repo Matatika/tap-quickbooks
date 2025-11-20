@@ -116,5 +116,6 @@
       ],
       "format": "date-time"
     }
-  }
+  },
+  "$id": "https://github.com/Matatika/tap-quickbooks/blob/main/tap_quickbooks/schemas/SalesReceipt.json"
 }
