@@ -1,0 +1,137 @@
+{
+  "type": "object",
+  "properties": {
+    "Id": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "VendorRef": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Line": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "TotalAmt": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "PayType": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "SyncToken": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "CurrencyRef": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "DocNumber": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "PrivateNote": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "TxnDate": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "ExchangeRate": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "APAccountRef": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "DepartmentRef": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "ProcessBillPayment": {
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    "MetaData": {
+      "type": [
+        "null",
+        "object"
+      ],
+      "properties": {
+        "CreateTime": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "format": "date-time"
+        },
+        "LastUpdatedTime": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "format": "date-time"
+        }
+      }
+    },
+    "CheckPayment": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "CreditCardPayment": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "MetaData.CreateTime": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "date-time"
+    },
+    "MetaData.LastUpdatedTime": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "date-time"
+    }
+  }
+}

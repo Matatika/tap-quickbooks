@@ -1,0 +1,101 @@
+{
+  "type": "object",
+  "properties": {
+    "FileName": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "FileAccessUri": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "TempDownloadUri": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Size": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "ContentType": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "domain": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "sparse": {
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    "Id": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "SyncToken": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "MetaData": {
+      "type": [
+        "null",
+        "object"
+      ],
+      "properties": {
+        "CreateTime": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "format": "date-time"
+        },
+        "LastUpdatedTime": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "format": "date-time"
+        }
+      }
+    },
+    "AttachableRef": {
+      "type": [
+        "null",
+        "array"
+      ]
+    },
+    "MetaData.CreateTime": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "date-time"
+    },
+    "MetaData.LastUpdatedTime": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "date-time"
+    }
+  }
+}

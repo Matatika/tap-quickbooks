@@ -1,0 +1,101 @@
+{
+  "type": "object",
+  "properties": {
+    "EmailMessagesPrefs": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "ProductAndServicesPrefs": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "AccountingInfoPrefs": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "SalesFormsPrefs": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "VendorAndPurchasesPrefs": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "TaxPrefs": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "OtherPrefs": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "sparse": {
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    "CurrencyPrefs": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Id": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "MetaData": {
+      "type": [
+        "null",
+        "object"
+      ],
+      "properties": {
+        "CreateTime": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "format": "date-time"
+        },
+        "LastUpdatedTime": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "format": "date-time"
+        }
+      }
+    },
+    "MetaData.CreateTime": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "date-time"
+    },
+    "MetaData.LastUpdatedTime": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "date-time"
+    }
+  }
+}

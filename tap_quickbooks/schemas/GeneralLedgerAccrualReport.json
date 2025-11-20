@@ -1,0 +1,287 @@
+{
+  "type": "object",
+  "properties": {
+    "Date": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "TransactionType": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "TransactionTypeId": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Num": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Adj": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "CreateDate": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "CreatedBy": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "LastModified": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "LastModifiedBy": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Name": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "NameId": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Customer": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "CustomerId": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Vendor": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "VendorId": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Employee": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "EmployeeId": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Location": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "LocationId": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Product/Service": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Product/ServiceId": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Memo": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Qty": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Rate": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Account#": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Account": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "AccountId": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Split": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "InvoiceDate": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "A/RPaid": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "A/PPaid": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Clr": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "CheckPrinted": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Debit": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Credit": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "OpenBalance": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Amount": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "TaxName": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "TaxAmount": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "TaxableAmount": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Klass": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "KlassId": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Class": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "ClassId": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Categories": {
+      "type": [
+        "null",
+        "array"
+      ]
+    },
+    "Department": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "DepartmentId": {
+      "type": [
+        "null",
+        "string"
+      ]
+    }
+  }
+}

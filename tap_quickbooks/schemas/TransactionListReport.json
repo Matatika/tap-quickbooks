@@ -1,0 +1,113 @@
+{
+  "type": "object",
+  "properties": {
+    "Date": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "TransactionTypeId": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "TransactionType": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Num": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Posting": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "NameId": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Name": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Memo": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "AccountId": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Account": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "SplitId": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Split": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Class": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "ClassId": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "LocationId": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Location": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Amount": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "Categories": {
+      "type": [
+        "null",
+        "array"
+      ]
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "object",
+  "properties": {
+    "Account": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Categories": {
+      "type": [
+        "null",
+        "array"
+      ]
+    },
+    "MonthlyTotal": {
+      "type": [
+        "null",
+        "array"
+      ]
+    }
+  }
+}

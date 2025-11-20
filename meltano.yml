@@ -1,0 +1,71 @@
+send_anonymous_usage_stats: true
+project_id: "tap-quickbooks"
+default_environment: test
+requires_meltano: ">=4.0"
+environments:
+- name: test
+plugins:
+  extractors:
+  - name: "tap-quickbooks"
+    namespace: "tap_quickbooks"
+    pip_url: -e .
+    capabilities:
+    - catalog
+    - state
+    - discover
+    - about
+    - activate-version
+    - stream-maps
+    - schema-flattening
+    - batch
+    - structured-logging
+
+    settings:
+    - name: client_id
+      kind: password
+      label: Client ID
+      description: QuickBooks OAuth2 client ID
+      sensitive: true
+
+    - name: client_secret
+      kind: password
+      label: Client Secret
+      description: QuickBooks OAuth2 client secret
+      sensitive: true
+
+    - name: refresh_token
+      kind: password
+      label: Refresh Token
+      description: QuickBooks OAuth2 refresh token
+      sensitive: true
+
+    - name: realm_id
+      label: Realm ID
+      description: QuickBooks company/realm ID
+
+    - name: start_date
+      kind: date_iso8601
+      label: Start Date
+      description: The earliest record date to sync (RFC3339 format)
+
+    - name: user_agent
+      label: User Agent
+      description: Custom User-Agent header to send with each request
+
+    - name: sandbox
+      kind: boolean
+      label: Sandbox
+      description: Whether to use the QuickBooks sandbox environment
+      value: false
+
+    settings_group_validation:
+    - [client_id, client_secret, refresh_token, realm_id, start_date]
+
+    config:
+      start_date: '2020-01-01T00:00:00Z'
+      sandbox: false
+
+  loaders:
+  - name: target-jsonl
+    variant: andyh1203
+    pip_url: target-jsonl

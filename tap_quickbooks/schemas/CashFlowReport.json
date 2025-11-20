@@ -1,0 +1,23 @@
+{
+  "type": "object",
+  "properties": {
+    "Total": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "Account": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Categories": {
+      "type": [
+        "null",
+        "array"
+      ]
+    }
+  }
+}

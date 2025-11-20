@@ -1,0 +1,96 @@
+{
+  "type": "object",
+  "properties": {
+    "Adjustment": {
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    "TotalAmt": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "HomeTotalAmt": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "Id": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "MetaData": {
+      "type": [
+        "null",
+        "object"
+      ],
+      "properties": {
+        "CreateTime": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "format": "date-time"
+        },
+        "LastUpdatedTime": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "format": "date-time"
+        }
+      }
+    },
+    "DocNumber": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "TxnDate": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "date-time"
+    },
+    "CurrencyRef": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "ExchangeRate": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "Line": {
+      "type": [
+        "null",
+        "array"
+      ]
+    },
+    "MetaData.CreateTime": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "date-time"
+    },
+    "MetaData.LastUpdatedTime": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "date-time"
+    }
+  }
+}

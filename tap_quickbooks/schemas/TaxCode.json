@@ -1,0 +1,101 @@
+{
+  "type": "object",
+  "properties": {
+    "Id": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Name": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "PurchaseTaxRateList": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "SalesTaxRateList": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "TaxGroup": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Taxable": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Active": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Description": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Hidden": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "MetaData": {
+      "type": [
+        "null",
+        "object"
+      ],
+      "properties": {
+        "CreateTime": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "format": "date-time"
+        },
+        "LastUpdatedTime": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "format": "date-time"
+        }
+      }
+    },
+    "TaxCodeConfigType": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "MetaData.CreateTime": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "date-time"
+    },
+    "MetaData.LastUpdatedTime": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "date-time"
+    }
+  }
+}

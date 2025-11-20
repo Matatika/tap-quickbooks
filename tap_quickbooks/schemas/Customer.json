@@ -1,0 +1,258 @@
+{
+  "type": "object",
+  "properties": {
+    "Taxable": {
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    "BillAddr": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "ShipAddr": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Job": {
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    "BillWithParent": {
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    "GivenName": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "MiddleName": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "FamilyName": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Suffix": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Title": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "WebAddr": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "ParentRef": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Mobile": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Notes": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "PaymentMethodRef": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "OpenBalanceDate": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "date-time"
+    },
+    "CustomerTypeRef": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "SalesTermRef": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "DefaultTaxCodeRef": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Balance": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "BalanceWithJobs": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "CurrencyRef": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "PreferredDeliveryMethod": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "IsProject": {
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    "Id": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "MetaData": {
+      "type": [
+        "null",
+        "object"
+      ],
+      "properties": {
+        "CreateTime": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "format": "date-time"
+        },
+        "LastUpdatedTime": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "format": "date-time"
+        }
+      }
+    },
+    "FullyQualifiedName": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "CompanyName": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "DisplayName": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "PrintOnCheckName": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Active": {
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    "PrimaryEmailAddr": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "PrimaryPhone": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "AlternatePhone": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Fax": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "PrimaryTaxIdentifier": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "TaxExemptionReasonId": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "MetaData.CreateTime": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "date-time"
+    },
+    "MetaData.LastUpdatedTime": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "date-time"
+    }
+  }
+}

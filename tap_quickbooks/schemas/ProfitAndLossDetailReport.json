@@ -1,0 +1,185 @@
+{
+  "type": "object",
+  "properties": {
+    "Date": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "TransactionType": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "TransactionTypeId": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Num": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "CreateDate": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "CreatedBy": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "LastModified": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "LastModifiedBy": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Name": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "NameId": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Location": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "LocationId": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Class": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "ClassId": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Memo": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Split": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "SplitId": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Debit": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Credit": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "PaymentMethod": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "PaymentMethodId": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Amount": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "Balance": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "TaxName": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "TaxAmount": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "TaxableAmount": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Categories": {
+      "type": [
+        "null",
+        "array"
+      ]
+    },
+    "AccountId": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Account": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Store": {
+      "type": [
+        "null",
+        "string"
+      ]
+    }
+  }
+}

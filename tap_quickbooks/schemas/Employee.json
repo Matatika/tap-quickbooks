@@ -1,0 +1,125 @@
+{
+  "type": "object",
+  "properties": {
+    "Id": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "DisplayName": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "PrintOnCheckName": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "MetaData": {
+      "type": [
+        "null",
+        "object"
+      ],
+      "properties": {
+        "CreateTime": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "format": "date-time"
+        },
+        "LastUpdatedTime": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "format": "date-time"
+        }
+      }
+    },
+    "BillableTime": {
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    "HiredDate": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "domain": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "sparse": {
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    "PrimaryAddr": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "GivenName": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "FamilyName": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Active": {
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    "V4IDPseudonym": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "PrimaryPhone": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "SyncToken": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "MetaData.CreateTime": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "date-time"
+    },
+    "MetaData.LastUpdatedTime": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "date-time"
+    }
+  }
+}

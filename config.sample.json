@@ -1,0 +1,8 @@
+{
+  "client_id": "your_quickbooks_client_id",
+  "client_secret": "your_quickbooks_client_secret",
+  "refresh_token": "your_quickbooks_refresh_token",
+  "realm_id": "your_quickbooks_realm_id",
+  "start_date": "2020-01-01T00:00:00Z",
+  "sandbox": false
+}

@@ -1,0 +1,126 @@
+{
+  "type": "object",
+  "properties": {
+    "HourlyRate": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "CustomerRef": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Taxable": {
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    "Description": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Minutes": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "MetaData": {
+      "type": [
+        "null",
+        "object"
+      ],
+      "properties": {
+        "CreateTime": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "format": "date-time"
+        },
+        "LastUpdatedTime": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "format": "date-time"
+        }
+      }
+    },
+    "ItemRef": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Id": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "domain": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "TxnDate": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "date-time"
+    },
+    "EmployeeRef": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "BillableStatus": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "NameOf": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "ClassRef": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Hours": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "MetaData.CreateTime": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "date-time"
+    },
+    "MetaData.LastUpdatedTime": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "date-time"
+    }
+  }
+}

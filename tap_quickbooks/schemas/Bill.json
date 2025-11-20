@@ -1,0 +1,146 @@
+{
+  "type": "object",
+  "properties": {
+    "Id": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "VendorRef": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Line": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "CurrencyRef": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "TxnDate": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "date-time"
+    },
+    "APAccountRef": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "SalesTermRef": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "LinkedTxn": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "TotalAmt": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "DueDate": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "date-time"
+    },
+    "MetaData": {
+      "type": [
+        "null",
+        "object"
+      ],
+      "properties": {
+        "CreateTime": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "format": "date-time"
+        },
+        "LastUpdatedTime": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "format": "date-time"
+        }
+      }
+    },
+    "DocNumber": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "PrivateNote": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "ExchangeRate": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "DepartmentRef": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "HomeBalance": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "RecurDataRef": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "date-time"
+    },
+    "Balance": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "MetaData.CreateTime": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "date-time"
+    },
+    "MetaData.LastUpdatedTime": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "date-time"
+    }
+  }
+}

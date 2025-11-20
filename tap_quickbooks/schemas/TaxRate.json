@@ -1,0 +1,113 @@
+{
+  "type": "object",
+  "properties": {
+    "Name": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "SyncToken": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "RateValue": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "AgencyRef": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "SpecialTaxType": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "EffectiveTaxRate": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "DisplayType": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "TaxReturnLineRef": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Active": {
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    "OriginalTaxRate": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Description": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Id": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "MetaData": {
+      "type": [
+        "null",
+        "object"
+      ],
+      "properties": {
+        "CreateTime": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "format": "date-time"
+        },
+        "LastUpdatedTime": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "format": "date-time"
+        }
+      }
+    },
+    "MetaData.CreateTime": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "date-time"
+    },
+    "MetaData.LastUpdatedTime": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "date-time"
+    }
+  }
+}

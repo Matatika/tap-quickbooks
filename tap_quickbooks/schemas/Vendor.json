@@ -1,0 +1,269 @@
+{
+  "type": "object",
+  "properties": {
+    "Id": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "SyncToken": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Title": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "GivenName": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "MiddleName": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Suffix": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "FamilyName": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "PrimaryEmailAddr": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "DisplayName": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "OtherContactInfo": {
+      "type": [
+        "null",
+        "array"
+      ]
+    },
+    "APAccountRef": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "TermRef": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Source": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "GSTIN": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "T4AEligible": {
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    "Fax": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "BusinessNumber": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "CurrencyRef": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "HasTPAR": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "TaxReportingBasis": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Mobile": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "PrimaryPhone": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Active": {
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    "AlternatePhone": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "MetaData": {
+      "type": [
+        "null",
+        "object"
+      ],
+      "properties": {
+        "CreateTime": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "format": "date-time"
+        },
+        "LastUpdatedTime": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "format": "date-time"
+        }
+      }
+    },
+    "sparse": {
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    "Vendor1099": {
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    "CostRate": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "BillRate": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "WebAddr": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "T5018Eligible": {
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    "CompanyName": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "VendorPaymentBankDetail": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "TaxIdentifier": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "AcctNum": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "GSTRegistrationType": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "PrintOnCheckName": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "BillAddr": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Balance": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "MetaData.CreateTime": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "date-time"
+    },
+    "MetaData.LastUpdatedTime": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "date-time"
+    }
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "type": "object",
+  "properties": {
+    "Id": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Name": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "SyncToken": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "DiscountPercent": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "DiscountDays": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "Active": {
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    "Type": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "MetaData": {
+      "type": [
+        "null",
+        "object"
+      ],
+      "properties": {
+        "CreateTime": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "format": "date-time"
+        },
+        "LastUpdatedTime": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "format": "date-time"
+        }
+      }
+    },
+    "DayOfMonthDue": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "DiscountDayOfMonth": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "DueNextMonthDays": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "DueDays": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "MetaData.CreateTime": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "date-time"
+    },
+    "MetaData.LastUpdatedTime": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "date-time"
+    }
+  }
+}

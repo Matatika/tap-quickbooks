@@ -1,0 +1,47 @@
+{
+  "type": "object",
+  "properties": {
+    "Customer": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Current": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "1-30": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "31-60": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "61-90": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "91andover": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "Total": {
+      "type": [
+        "null",
+        "number"
+      ]
+    }
+  }
+}

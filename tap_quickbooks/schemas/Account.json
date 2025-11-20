@@ -1,0 +1,125 @@
+{
+  "type": "object",
+  "properties": {
+    "Name": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "SubAccount": {
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    "Description": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "FullyQualifiedName": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Active": {
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    "Classification": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "AccountType": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "AccountSubType": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "AcctNum": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "CurrentBalance": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "CurrentBalanceWithSubAccounts": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "CurrencyRef": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "ParentRef": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Id": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "MetaData": {
+      "type": [
+        "null",
+        "object"
+      ],
+      "properties": {
+        "CreateTime": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "format": "date-time"
+        },
+        "LastUpdatedTime": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "format": "date-time"
+        }
+      }
+    },
+    "MetaData.CreateTime": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "date-time"
+    },
+    "MetaData.LastUpdatedTime": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "date-time"
+    }
+  }
+}
