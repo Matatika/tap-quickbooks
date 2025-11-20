@@ -1,1 +1,1 @@
-"""Tap for MySourceName."""
+"""Tap for QuickBooks."""

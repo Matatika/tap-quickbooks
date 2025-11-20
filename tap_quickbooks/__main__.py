@@ -1,7 +1,7 @@
-"""MySourceName entry point."""
+"""QuickBooks entry point."""
 
 from __future__ import annotations
 
-from tap_quickbooks.tap import TapMySourceName
+from tap_quickbooks.tap import TapQuickBooks
 
-TapMySourceName.cli()
+TapQuickBooks.cli()
