@@ -7,6 +7,84 @@
         "string"
       ]
     },
+    "VendorRef": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Line": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "TotalAmt": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "PayType": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "SyncToken": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "CurrencyRef": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "DocNumber": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "PrivateNote": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "TxnDate": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "ExchangeRate": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "APAccountRef": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "DepartmentRef": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "ProcessBillPayment": {
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
     "MetaData": {
       "type": [
         "null",
@@ -29,77 +107,16 @@
         }
       }
     },
-    "CustomField": {
-      "type": [
-        "null",
-        "array"
-      ]
-    },
-    "DocNumber": {
+    "CheckPayment": {
       "type": [
         "null",
         "string"
       ]
     },
-    "TxnDate": {
+    "CreditCardPayment": {
       "type": [
         "null",
         "string"
-      ],
-      "format": "date-time"
-    },
-    "CurrencyRef": {
-      "type": [
-        "null",
-        "string"
-      ]
-    },
-    "CustomerRef": {
-      "type": [
-        "null",
-        "string"
-      ]
-    },
-    "Line": {
-      "type": [
-        "null",
-        "array"
-      ]
-    },
-    "FreeFormAddress": {
-      "type": [
-        "null",
-        "boolean"
-      ]
-    },
-    "ShipFromAddr": {
-      "type": [
-        "null",
-        "string"
-      ]
-    },
-    "TotalAmt": {
-      "type": [
-        "null",
-        "number"
-      ]
-    },
-    "ApplyTaxAfterDiscount": {
-      "type": [
-        "null",
-        "boolean"
-      ]
-    },
-    "PrintStatus": {
-      "type": [
-        "null",
-        "string"
-      ]
-    },
-    "Balance": {
-      "type": [
-        "null",
-        "number"
       ]
     },
     "MetaData.CreateTime": {
@@ -117,5 +134,5 @@
       "format": "date-time"
     }
   },
-  "$id": "https://github.com/Matatika/tap-quickbooks/blob/main/tap_quickbooks/schemas/SalesReceipt.json"
+  "$id": "https://github.com/Matatika/tap-quickbooks/blob/main/tap_quickbooks/schemas/bill_payment.json"
 }

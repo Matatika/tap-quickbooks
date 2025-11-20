@@ -1,10 +1,70 @@
 {
   "type": "object",
   "properties": {
-    "RemainingCredit": {
+    "Name": {
       "type": [
         "null",
-        "number"
+        "string"
+      ]
+    },
+    "SyncToken": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "RateValue": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "AgencyRef": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "SpecialTaxType": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "EffectiveTaxRate": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "DisplayType": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "TaxReturnLineRef": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Active": {
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    "OriginalTaxRate": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Description": {
+      "type": [
+        "null",
+        "string"
       ]
     },
     "Id": {
@@ -35,67 +95,6 @@
         }
       }
     },
-    "CustomField": {
-      "type": [
-        "null",
-        "array"
-      ]
-    },
-    "DocNumber": {
-      "type": [
-        "null",
-        "string"
-      ]
-    },
-    "TxnDate": {
-      "type": [
-        "null",
-        "string"
-      ],
-      "format": "date-time"
-    },
-    "CurrencyRef": {
-      "type": [
-        "null",
-        "string"
-      ]
-    },
-    "CustomerRef": {
-      "type": [
-        "null",
-        "string"
-      ]
-    },
-    "ClassRef": {
-      "type": [
-        "null",
-        "string"
-      ]
-    },
-    "Line": {
-      "type": [
-        "null",
-        "array"
-      ]
-    },
-    "CustomerMemo": {
-      "type": [
-        "null",
-        "string"
-      ]
-    },
-    "TotalAmt": {
-      "type": [
-        "null",
-        "number"
-      ]
-    },
-    "Balance": {
-      "type": [
-        "null",
-        "number"
-      ]
-    },
     "MetaData.CreateTime": {
       "type": [
         "null",
@@ -111,5 +110,5 @@
       "format": "date-time"
     }
   },
-  "$id": "https://github.com/Matatika/tap-quickbooks/blob/main/tap_quickbooks/schemas/CreditMemo.json"
+  "$id": "https://github.com/Matatika/tap-quickbooks/blob/main/tap_quickbooks/schemas/tax_rate.json"
 }

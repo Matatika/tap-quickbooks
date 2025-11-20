@@ -7,18 +7,24 @@
         "number"
       ]
     },
+    "Account": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
     "Categories": {
       "type": [
         "null",
         "array"
       ]
     },
-    "Account": {
+    "MonthlyTotal": {
       "type": [
         "null",
-        "string"
+        "array"
       ]
     }
   },
-  "$id": "https://github.com/Matatika/tap-quickbooks/blob/main/tap_quickbooks/schemas/ProfitAndLossReport.json"
+  "$id": "https://github.com/Matatika/tap-quickbooks/blob/main/tap_quickbooks/schemas/monthly_cash_flow_report.json"
 }

@@ -1,22 +1,22 @@
 {
   "type": "object",
   "properties": {
-    "Name": {
-      "type": [
-        "null",
-        "string"
-      ]
-    },
-    "SyncToken": {
-      "type": [
-        "null",
-        "string"
-      ]
-    },
-    "Active": {
+    "Adjustment": {
       "type": [
         "null",
         "boolean"
+      ]
+    },
+    "TotalAmt": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "HomeTotalAmt": {
+      "type": [
+        "null",
+        "number"
       ]
     },
     "Id": {
@@ -47,6 +47,37 @@
         }
       }
     },
+    "DocNumber": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "TxnDate": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "date-time"
+    },
+    "CurrencyRef": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "ExchangeRate": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "Line": {
+      "type": [
+        "null",
+        "array"
+      ]
+    },
     "MetaData.CreateTime": {
       "type": [
         "null",
@@ -62,5 +93,5 @@
       "format": "date-time"
     }
   },
-  "$id": "https://github.com/Matatika/tap-quickbooks/blob/main/tap_quickbooks/schemas/CustomerType.json"
+  "$id": "https://github.com/Matatika/tap-quickbooks/blob/main/tap_quickbooks/schemas/journal_entry.json"
 }

@@ -7,36 +7,6 @@
         "string"
       ]
     },
-    "EmailStatus": {
-      "type": [
-        "null",
-        "string"
-      ]
-    },
-    "POStatus": {
-      "type": [
-        "null",
-        "string"
-      ]
-    },
-    "domain": {
-      "type": [
-        "null",
-        "string"
-      ]
-    },
-    "sparse": {
-      "type": [
-        "null",
-        "boolean"
-      ]
-    },
-    "SyncToken": {
-      "type": [
-        "null",
-        "string"
-      ]
-    },
     "MetaData": {
       "type": [
         "null",
@@ -75,7 +45,8 @@
       "type": [
         "null",
         "string"
-      ]
+      ],
+      "format": "date-time"
     },
     "CurrencyRef": {
       "type": [
@@ -83,16 +54,10 @@
         "string"
       ]
     },
-    "ExchangeRate": {
+    "CustomerRef": {
       "type": [
         "null",
         "string"
-      ]
-    },
-    "LinkedTxn": {
-      "type": [
-        "null",
-        "array"
       ]
     },
     "Line": {
@@ -101,13 +66,13 @@
         "array"
       ]
     },
-    "VendorRef": {
+    "FreeFormAddress": {
       "type": [
         "null",
-        "string"
+        "boolean"
       ]
     },
-    "APAccountRef": {
+    "ShipFromAddr": {
       "type": [
         "null",
         "string"
@@ -116,13 +81,25 @@
     "TotalAmt": {
       "type": [
         "null",
-        "string"
+        "number"
       ]
     },
-    "Memo": {
+    "ApplyTaxAfterDiscount": {
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    "PrintStatus": {
       "type": [
         "null",
         "string"
+      ]
+    },
+    "Balance": {
+      "type": [
+        "null",
+        "number"
       ]
     },
     "MetaData.CreateTime": {
@@ -140,5 +117,5 @@
       "format": "date-time"
     }
   },
-  "$id": "https://github.com/Matatika/tap-quickbooks/blob/main/tap_quickbooks/schemas/PurchaseOrder.json"
+  "$id": "https://github.com/Matatika/tap-quickbooks/blob/main/tap_quickbooks/schemas/sales_receipt.json"
 }

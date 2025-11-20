@@ -7,82 +7,34 @@
         "string"
       ]
     },
-    "VendorRef": {
+    "EmailStatus": {
       "type": [
         "null",
         "string"
       ]
     },
-    "Line": {
+    "POStatus": {
       "type": [
         "null",
         "string"
       ]
     },
-    "TotalAmt": {
-      "type": [
-        "null",
-        "number"
-      ]
-    },
-    "PayType": {
+    "domain": {
       "type": [
         "null",
         "string"
+      ]
+    },
+    "sparse": {
+      "type": [
+        "null",
+        "boolean"
       ]
     },
     "SyncToken": {
       "type": [
         "null",
         "string"
-      ]
-    },
-    "CurrencyRef": {
-      "type": [
-        "null",
-        "string"
-      ]
-    },
-    "DocNumber": {
-      "type": [
-        "null",
-        "string"
-      ]
-    },
-    "PrivateNote": {
-      "type": [
-        "null",
-        "string"
-      ]
-    },
-    "TxnDate": {
-      "type": [
-        "null",
-        "string"
-      ]
-    },
-    "ExchangeRate": {
-      "type": [
-        "null",
-        "number"
-      ]
-    },
-    "APAccountRef": {
-      "type": [
-        "null",
-        "string"
-      ]
-    },
-    "DepartmentRef": {
-      "type": [
-        "null",
-        "string"
-      ]
-    },
-    "ProcessBillPayment": {
-      "type": [
-        "null",
-        "boolean"
       ]
     },
     "MetaData": {
@@ -107,13 +59,67 @@
         }
       }
     },
-    "CheckPayment": {
+    "CustomField": {
+      "type": [
+        "null",
+        "array"
+      ]
+    },
+    "DocNumber": {
       "type": [
         "null",
         "string"
       ]
     },
-    "CreditCardPayment": {
+    "TxnDate": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "CurrencyRef": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "ExchangeRate": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "LinkedTxn": {
+      "type": [
+        "null",
+        "array"
+      ]
+    },
+    "Line": {
+      "type": [
+        "null",
+        "array"
+      ]
+    },
+    "VendorRef": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "APAccountRef": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "TotalAmt": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Memo": {
       "type": [
         "null",
         "string"
@@ -134,5 +140,5 @@
       "format": "date-time"
     }
   },
-  "$id": "https://github.com/Matatika/tap-quickbooks/blob/main/tap_quickbooks/schemas/BillPayment.json"
+  "$id": "https://github.com/Matatika/tap-quickbooks/blob/main/tap_quickbooks/schemas/purchase_order.json"
 }

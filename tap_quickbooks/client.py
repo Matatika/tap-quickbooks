@@ -81,6 +81,24 @@ class QuickBooksStream(RESTStream):
     # Most QuickBooks objects use this replication key
     replication_key: str | None = "MetaData.LastUpdatedTime"
 
+    # QuickBooks API entity name (PascalCase)
+    # Override this in subclasses if different from the capitalized stream name
+    qb_entity_name: str | None = None
+
+    @property
+    def entity_name(self) -> str:
+        """Get the QuickBooks API entity name (PascalCase).
+
+        Returns:
+            The entity name for QuickBooks API queries.
+        """
+        if self.qb_entity_name:
+            return self.qb_entity_name
+
+        # Convert snake_case stream name to PascalCase
+        # e.g., "bill_payment" -> "BillPayment"
+        return "".join(word.capitalize() for word in self.name.split("_"))
+
     @override
     @property
     def url_base(self) -> str:
@@ -182,8 +200,8 @@ class QuickBooksStream(RESTStream):
         # Build the WHERE clause
         where_clause = " AND ".join(query_parts) if query_parts else ""
 
-        # Build the full query
-        query = f"SELECT * FROM {self.name}"  # noqa: S608
+        # Build the full query using the QuickBooks entity name (PascalCase)
+        query = f"SELECT * FROM {self.entity_name}"  # noqa: S608
         if where_clause:
             query += f" WHERE {where_clause}"
 

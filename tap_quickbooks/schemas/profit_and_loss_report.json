@@ -7,24 +7,18 @@
         "number"
       ]
     },
-    "Account": {
-      "type": [
-        "null",
-        "string"
-      ]
-    },
     "Categories": {
       "type": [
         "null",
         "array"
       ]
     },
-    "DailyTotal": {
+    "Account": {
       "type": [
         "null",
-        "array"
+        "string"
       ]
     }
   },
-  "$id": "https://github.com/Matatika/tap-quickbooks/blob/main/tap_quickbooks/schemas/DailyCashFlowReport.json"
+  "$id": "https://github.com/Matatika/tap-quickbooks/blob/main/tap_quickbooks/schemas/profit_and_loss_report.json"
 }

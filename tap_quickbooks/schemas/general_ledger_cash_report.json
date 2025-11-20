@@ -284,5 +284,5 @@
       ]
     }
   },
-  "$id": "https://github.com/Matatika/tap-quickbooks/blob/main/tap_quickbooks/schemas/GeneralLedgerAccrualReport.json"
+  "$id": "https://github.com/Matatika/tap-quickbooks/blob/main/tap_quickbooks/schemas/general_ledger_cash_report.json"
 }

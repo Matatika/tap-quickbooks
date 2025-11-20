@@ -1,6 +1,12 @@
 {
   "type": "object",
   "properties": {
+    "Total": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
     "Account": {
       "type": [
         "null",
@@ -13,12 +19,12 @@
         "array"
       ]
     },
-    "MonthlyTotal": {
+    "DailyTotal": {
       "type": [
         "null",
         "array"
       ]
     }
   },
-  "$id": "https://github.com/Matatika/tap-quickbooks/blob/main/tap_quickbooks/schemas/MonthlyBalanceSheetReport.json"
+  "$id": "https://github.com/Matatika/tap-quickbooks/blob/main/tap_quickbooks/schemas/daily_cash_flow_report.json"
 }
