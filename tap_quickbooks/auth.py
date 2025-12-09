@@ -2,9 +2,11 @@
 
 from __future__ import annotations
 
+import base64
 import sys
 
 from singer_sdk.authenticators import OAuthAuthenticator, SingletonMeta
+from singer_sdk.streams import Stream as RESTStreamBase
 
 if sys.version_info >= (3, 12):
     from typing import override
@@ -40,7 +42,27 @@ class QuickBooksAuthenticator(OAuthAuthenticator, metaclass=SingletonMeta):
             auth_endpoint=auth_endpoint,
             oauth_scopes=oauth_scopes,
         )
+        self._oauth_headers = self.oauth_request_headers
         self._refresh_token = refresh_token
+
+    @property
+    def oauth_request_headers(self) -> dict:
+        """Return headers for OAuth token request.
+
+        Uses Basic auth with base64 encoded client_id:client_secret.
+
+        Returns:
+            A dict with headers for the OAuth token request.
+        """
+        client_id = self.client_id
+        client_secret = self.client_secret
+        credentials = f"{client_id}:{client_secret}"
+        encoded = base64.b64encode(credentials.encode()).decode()
+
+        return {
+            "Authorization": f"Basic {encoded}",
+            "Content-Type": "application/x-www-form-urlencoded",
+        }
 
     @override
     @property
@@ -52,7 +74,5 @@ class QuickBooksAuthenticator(OAuthAuthenticator, metaclass=SingletonMeta):
         """
         return {
             "grant_type": "refresh_token",
-            "client_id": self.client_id,
-            "client_secret": self.client_secret,
             "refresh_token": self._refresh_token,
         }

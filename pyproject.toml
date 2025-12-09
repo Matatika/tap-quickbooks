@@ -1,5 +1,5 @@
 [project]
-name = "matatika-tap-quickbooks"
+name = "tap-quickbooks"
 version = "0.1.0"
 description = "Singer tap for QuickBooks, built with the Meltano Singer SDK."
 readme = "README.md"
