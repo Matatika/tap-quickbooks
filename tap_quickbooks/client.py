@@ -158,9 +158,9 @@ class QuickBooksStream(RESTStream):
 
         # Add replication key filter for incremental sync
         if self.replication_key:
-            start_date = self.get_starting_replication_key_value(context)
+            start_date = self.get_starting_timestamp(context)
             if start_date:
-                query_parts.append(f"{self.replication_key} >= '{start_date}'")
+                query_parts.append(f"{self.replication_key} >= '{start_date.isoformat()}'")
 
         # Build the WHERE clause
         where_clause = " AND ".join(query_parts) if query_parts else ""
