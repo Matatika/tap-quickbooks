@@ -24,7 +24,6 @@ class TapQuickBooks(Tap):
         th.Property(
             "client_id",
             th.StringType(nullable=False),
-            required=True,
             secret=True,
             title="Client ID",
             description="QuickBooks OAuth2 client ID",
@@ -32,7 +31,6 @@ class TapQuickBooks(Tap):
         th.Property(
             "client_secret",
             th.StringType(nullable=False),
-            required=True,
             secret=True,
             title="Client Secret",
             description="QuickBooks OAuth2 client secret",
@@ -72,6 +70,17 @@ class TapQuickBooks(Tap):
             th.BooleanType(nullable=False),
             default=False,
             description="Whether to use the QuickBooks sandbox environment",
+        ),
+        th.Property(
+            "refresh_proxy_url",
+            th.StringType(nullable=False),
+            description="Proxy URL to enable token refresh without a client ID/secret",
+        ),
+        th.Property(
+            "refresh_proxy_url_auth",
+            th.StringType(nullable=False),
+            secret=True,
+            description="Authorization for proxy URL.",
         ),
     ).to_dict()
 

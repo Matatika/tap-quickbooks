@@ -13,7 +13,7 @@ from singer_sdk.pagination import BaseOffsetPaginator
 from singer_sdk.streams import RESTStream
 
 from tap_quickbooks import schemas
-from tap_quickbooks.auth import QuickBooksAuthenticator
+from tap_quickbooks.auth import ProxyQuickBooksAuthenticator, QuickBooksAuthenticator
 
 if sys.version_info >= (3, 12):
     from typing import override
@@ -102,13 +102,30 @@ class QuickBooksStream(RESTStream):
         Returns:
             An authenticator instance.
         """
-        return QuickBooksAuthenticator(
-            client_id=self.config["client_id"],
-            client_secret=self.config["client_secret"],
-            refresh_token=self.config["refresh_token"],
-            auth_endpoint="https://oauth.platform.intuit.com/oauth2/v1/tokens/bearer",
-            oauth_scopes="",  # QuickBooks doesn't use scopes
-        )
+        client_id = self.config.get("client_id")
+        client_secret = self.config.get("client_secret")
+
+        if client_id and client_secret:
+            return QuickBooksAuthenticator(
+                client_id=self.config["client_id"],
+                client_secret=self.config["client_secret"],
+                refresh_token=self.config["refresh_token"],
+                auth_endpoint="https://oauth.platform.intuit.com/oauth2/v1/tokens/bearer",
+                oauth_scopes="",  # QuickBooks doesn't use scopes
+            )
+
+        # proxy oauth
+        refresh_proxy_url = self.config.get("refresh_proxy_url")
+
+        if refresh_proxy_url:
+            return ProxyQuickBooksAuthenticator(
+                refresh_token=self.config["refresh_token"],
+                proxy_auth=self.config.get("refresh_proxy_url_auth"),
+                auth_endpoint=refresh_proxy_url,
+            )
+
+        msg = "Insufficient config to establish an authenticator. Must be one of {'client_id', 'client_secret', 'refresh_token'} or {'refresh_proxy_url', 'refresh_token'}."
+        raise RuntimeError(msg)
 
     @property
     @override
