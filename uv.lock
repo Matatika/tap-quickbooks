@@ -1,5 +1,5 @@
 version = 1
-revision = 3
+revision = 2
 requires-python = ">=3.10"
 
 [[package]]
@@ -653,64 +653,6 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/19/74/a633ee74eb36c44aa6d1095e7cc5569bebf04342ee146178e2d36600708b/jsonschema_specifications-2025.9.1.tar.gz", hash = "sha256:b540987f239e745613c7a9176f3edb72b832a4ac465cf02712288397832b5e8d", size = 32855, upload-time = "2025-09-08T01:34:59.186Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/41/45/1a4ed80516f02155c51f51e8cedb3c1902296743db0bbc66608a0db2814f/jsonschema_specifications-2025.9.1-py3-none-any.whl", hash = "sha256:98802fee3a11ee76ecaca44429fda8a41bff98b00a0f2838151b113f210cc6fe", size = 18437, upload-time = "2025-09-08T01:34:57.871Z" },
-]
-
-[[package]]
-name = "matatika-tap-quickbooks"
-version = "0.1.0"
-source = { editable = "." }
-dependencies = [
-    { name = "requests" },
-    { name = "singer-sdk" },
-    { name = "typing-extensions", marker = "python_full_version < '3.13'" },
-]
-
-[package.optional-dependencies]
-s3 = [
-    { name = "s3fs" },
-]
-
-[package.dev-dependencies]
-dev = [
-    { name = "pytest" },
-    { name = "pytest-github-actions-annotate-failures" },
-    { name = "singer-sdk", extra = ["testing"] },
-]
-test = [
-    { name = "pytest" },
-    { name = "pytest-github-actions-annotate-failures" },
-    { name = "singer-sdk", extra = ["testing"] },
-]
-typing = [
-    { name = "mypy" },
-    { name = "ty" },
-    { name = "types-requests" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "requests", specifier = "~=2.32.3" },
-    { name = "s3fs", marker = "extra == 's3'", specifier = "~=2025.10.0" },
-    { name = "singer-sdk", specifier = "~=0.53.2" },
-    { name = "typing-extensions", marker = "python_full_version < '3.13'", specifier = ">=4.5.0" },
-]
-provides-extras = ["s3"]
-
-[package.metadata.requires-dev]
-dev = [
-    { name = "pytest", specifier = ">=9" },
-    { name = "pytest-github-actions-annotate-failures", specifier = ">=0.3" },
-    { name = "singer-sdk", extras = ["testing"] },
-]
-test = [
-    { name = "pytest", specifier = ">=9" },
-    { name = "pytest-github-actions-annotate-failures", specifier = ">=0.3" },
-    { name = "singer-sdk", extras = ["testing"] },
-]
-typing = [
-    { name = "mypy", specifier = ">=1.16.0" },
-    { name = "ty", specifier = ">=0.0.1a16" },
-    { name = "types-requests" },
 ]
 
 [[package]]
@@ -1519,6 +1461,64 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/32/d5/0e66097fc64fa266f29a7963296b40a80d6a997b7ac13806183700676f86/sqlalchemy-2.0.44-cp313-cp313-win32.whl", hash = "sha256:ee51625c2d51f8baadf2829fae817ad0b66b140573939dd69284d2ba3553ae73", size = 2101275, upload-time = "2025-10-10T15:03:26.096Z" },
     { url = "https://files.pythonhosted.org/packages/03/51/665617fe4f8c6450f42a6d8d69243f9420f5677395572c2fe9d21b493b7b/sqlalchemy-2.0.44-cp313-cp313-win_amd64.whl", hash = "sha256:c1c80faaee1a6c3428cecf40d16a2365bcf56c424c92c2b6f0f9ad204b899e9e", size = 2127901, upload-time = "2025-10-10T15:03:27.548Z" },
     { url = "https://files.pythonhosted.org/packages/9c/5e/6a29fa884d9fb7ddadf6b69490a9d45fded3b38541713010dad16b77d015/sqlalchemy-2.0.44-py3-none-any.whl", hash = "sha256:19de7ca1246fbef9f9d1bff8f1ab25641569df226364a0e40457dc5457c54b05", size = 1928718, upload-time = "2025-10-10T15:29:45.32Z" },
+]
+
+[[package]]
+name = "tap-quickbooks"
+version = "0.1.0"
+source = { editable = "." }
+dependencies = [
+    { name = "requests" },
+    { name = "singer-sdk" },
+    { name = "typing-extensions", marker = "python_full_version < '3.13'" },
+]
+
+[package.optional-dependencies]
+s3 = [
+    { name = "s3fs" },
+]
+
+[package.dev-dependencies]
+dev = [
+    { name = "pytest" },
+    { name = "pytest-github-actions-annotate-failures" },
+    { name = "singer-sdk", extra = ["testing"] },
+]
+test = [
+    { name = "pytest" },
+    { name = "pytest-github-actions-annotate-failures" },
+    { name = "singer-sdk", extra = ["testing"] },
+]
+typing = [
+    { name = "mypy" },
+    { name = "ty" },
+    { name = "types-requests" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "requests", specifier = "~=2.32.3" },
+    { name = "s3fs", marker = "extra == 's3'", specifier = "~=2025.10.0" },
+    { name = "singer-sdk", specifier = "~=0.53.2" },
+    { name = "typing-extensions", marker = "python_full_version < '3.13'", specifier = ">=4.5.0" },
+]
+provides-extras = ["s3"]
+
+[package.metadata.requires-dev]
+dev = [
+    { name = "pytest", specifier = ">=9" },
+    { name = "pytest-github-actions-annotate-failures", specifier = ">=0.3" },
+    { name = "singer-sdk", extras = ["testing"] },
+]
+test = [
+    { name = "pytest", specifier = ">=9" },
+    { name = "pytest-github-actions-annotate-failures", specifier = ">=0.3" },
+    { name = "singer-sdk", extras = ["testing"] },
+]
+typing = [
+    { name = "mypy", specifier = ">=1.16.0" },
+    { name = "ty", specifier = ">=0.0.1a16" },
+    { name = "types-requests" },
 ]
 
 [[package]]
