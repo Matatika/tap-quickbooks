@@ -53,7 +53,6 @@ class TapQuickBooks(Tap):
         th.Property(
             "start_date",
             th.DateTimeType(nullable=False),
-            required=True,
             title="Start Date",
             description="The earliest record date to sync (RFC3339 format)",
         ),
