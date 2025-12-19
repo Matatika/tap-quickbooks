@@ -107,8 +107,8 @@ class QuickBooksStream(RESTStream):
 
         if client_id and client_secret:
             return QuickBooksAuthenticator(
-                client_id=self.config["client_id"],
-                client_secret=self.config["client_secret"],
+                client_id=client_id,
+                client_secret=client_secret,
                 refresh_token=self.config["refresh_token"],
                 auth_endpoint="https://oauth.platform.intuit.com/oauth2/v1/tokens/bearer",
                 oauth_scopes="",  # QuickBooks doesn't use scopes
