@@ -15,6 +15,16 @@ else:
     from typing_extensions import override
 
 
+REFRESH_TOKEN_PROPERTY = th.Property(
+    "refresh_token",
+    th.StringType(nullable=False),
+    required=True,
+    secret=True,
+    title="Refresh Token",
+    description="QuickBooks OAuth2 refresh token",
+)
+
+
 class TapQuickBooks(Tap):
     """Singer tap for QuickBooks."""
 
@@ -22,26 +32,45 @@ class TapQuickBooks(Tap):
 
     config_jsonschema = th.PropertiesList(
         th.Property(
-            "client_id",
-            th.StringType(nullable=False),
-            secret=True,
-            title="Client ID",
-            description="QuickBooks OAuth2 client ID",
-        ),
-        th.Property(
-            "client_secret",
-            th.StringType(nullable=False),
-            secret=True,
-            title="Client Secret",
-            description="QuickBooks OAuth2 client secret",
-        ),
-        th.Property(
-            "refresh_token",
-            th.StringType(nullable=False),
+            "oauth_credentials",
+            th.OneOf(
+                th.ObjectType(
+                    th.Property(
+                        "client_id",
+                        th.StringType(nullable=False),
+                        required=True,
+                        title="Client ID",
+                        description="QuickBooks OAuth2 client ID",
+                    ),
+                    th.Property(
+                        "client_secret",
+                        th.StringType(nullable=False),
+                        required=True,
+                        secret=True,
+                        title="Client Secret",
+                        description="QuickBooks OAuth2 client secret",
+                    ),
+                    REFRESH_TOKEN_PROPERTY,
+                ),
+                th.ObjectType(
+                    th.Property(
+                        "refresh_proxy_url",
+                        th.StringType(nullable=False),
+                        required=True,
+                        title="Refresh Proxy URL",
+                        description="Proxy URL to support token refresh without a client ID/secret",
+                    ),
+                    th.Property(
+                        "refresh_proxy_url_auth",
+                        th.StringType,
+                        secret=True,
+                        title="Refresh Proxy URL Auth",
+                        description="Authorization for proxy URL",
+                    ),
+                    REFRESH_TOKEN_PROPERTY,
+                ),
+            ),
             required=True,
-            secret=True,
-            title="Refresh Token",
-            description="QuickBooks OAuth2 refresh token",
         ),
         th.Property(
             "realm_id",
@@ -69,17 +98,6 @@ class TapQuickBooks(Tap):
             th.BooleanType(nullable=False),
             default=False,
             description="Whether to use the QuickBooks sandbox environment",
-        ),
-        th.Property(
-            "refresh_proxy_url",
-            th.StringType(nullable=False),
-            description="Proxy URL to enable token refresh without a client ID/secret",
-        ),
-        th.Property(
-            "refresh_proxy_url_auth",
-            th.StringType(nullable=False),
-            secret=True,
-            description="Authorization for proxy URL.",
         ),
     ).to_dict()
 

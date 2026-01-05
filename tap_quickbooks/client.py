@@ -102,29 +102,30 @@ class QuickBooksStream(RESTStream):
         Returns:
             An authenticator instance.
         """
-        client_id = self.config.get("client_id")
-        client_secret = self.config.get("client_secret")
+        oauth_credentials: dict = self.config.get("oauth_credentials", {})
+        client_id = oauth_credentials.get("client_id")
+        client_secret = oauth_credentials.get("client_secret")
 
         if client_id and client_secret:
             return QuickBooksAuthenticator(
                 client_id=client_id,
                 client_secret=client_secret,
-                refresh_token=self.config["refresh_token"],
+                refresh_token=oauth_credentials["refresh_token"],
                 auth_endpoint="https://oauth.platform.intuit.com/oauth2/v1/tokens/bearer",
                 oauth_scopes="",  # QuickBooks doesn't use scopes
             )
 
         # proxy oauth
-        refresh_proxy_url = self.config.get("refresh_proxy_url")
+        refresh_proxy_url = oauth_credentials.get("refresh_proxy_url")
 
         if refresh_proxy_url:
             return ProxyQuickBooksAuthenticator(
-                refresh_token=self.config["refresh_token"],
-                proxy_auth=self.config.get("refresh_proxy_url_auth"),
+                refresh_token=oauth_credentials["refresh_token"],
+                proxy_auth=oauth_credentials.get("refresh_proxy_url_auth"),
                 auth_endpoint=refresh_proxy_url,
             )
 
-        msg = "Insufficient config to establish an authenticator. Must be one of {'client_id', 'client_secret', 'refresh_token'} or {'refresh_proxy_url', 'refresh_token'}."
+        msg = "Insufficient config to establish an authenticator. Must be one of {'oauth_credentials.client_id', 'oauth_credentials.client_secret', 'oauth_credentials.refresh_token'} or {'oauth_credentials.refresh_proxy_url', 'oauth_credentials.refresh_token'}."
         raise RuntimeError(msg)
 
     @property

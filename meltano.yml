@@ -21,19 +21,19 @@ plugins:
     - structured-logging
 
     settings:
-    - name: client_id
+    - name: oauth_credentials.client_id
       kind: password
       label: Client ID
       description: QuickBooks OAuth2 client ID
       sensitive: true
 
-    - name: client_secret
+    - name: oauth_credentials.client_secret
       kind: password
       label: Client Secret
       description: QuickBooks OAuth2 client secret
       sensitive: true
 
-    - name: refresh_token
+    - name: oauth_credentials.refresh_token
       kind: password
       label: Refresh Token
       description: QuickBooks OAuth2 refresh token
@@ -59,7 +59,7 @@ plugins:
       value: false
 
     settings_group_validation:
-    - [client_id, client_secret, refresh_token, realm_id, start_date]
+    - [oauth_credentials.client_id, oauth_credentials.client_secret, oauth_credentials.refresh_token, realm_id, start_date]
 
     config:
       start_date: '2020-01-01T00:00:00Z'

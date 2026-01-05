@@ -34,9 +34,9 @@ uv tool install git+https://github.com/Matatika/tap-quickbooks.git
 
 | Setting | Required | Default | Description |
 |:--------|:--------:|:-------:|:------------|
-| client_id | True | None | QuickBooks OAuth2 client ID |
-| client_secret | True | None | QuickBooks OAuth2 client secret |
-| refresh_token | True | None | QuickBooks OAuth2 refresh token |
+| oauth_credentials.client_id | True | None | QuickBooks OAuth2 client ID |
+| oauth_credentials.client_secret | True | None | QuickBooks OAuth2 client secret |
+| oauth_credentials.refresh_token | True | None | QuickBooks OAuth2 refresh token |
 | realm_id | True | None | QuickBooks company/realm ID |
 | start_date | True | None | The earliest record date to sync (RFC3339 format) |
 | user_agent | False | None | Custom User-Agent header to send with each request |
@@ -109,9 +109,11 @@ Create a `config.json` file:
 
 ```json
 {
-  "client_id": "your_client_id",
-  "client_secret": "your_client_secret",
-  "refresh_token": "your_refresh_token",
+  "oauth_credentials": {
+    "client_id": "your_client_id",
+    "client_secret": "your_client_secret",
+    "refresh_token": "your_refresh_token"
+  },
   "realm_id": "your_realm_id",
   "start_date": "2020-01-01T00:00:00Z",
   "sandbox": false
