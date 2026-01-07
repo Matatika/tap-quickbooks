@@ -135,3 +135,23 @@ def test_invalid_oauth_config_raises_validation_error():
     # Schema validation should fail during tap initialization
     with pytest.raises(ConfigValidationError):
         TapQuickBooks(config=invalid_config)
+
+
+def test_invalid_oauth_config_raises_value_error_when_validation_skipped():
+    """Test that incomplete OAuth configuration raises ValueError when schema validation is skipped."""
+
+    # Config with oauth_credentials but missing required fields for both modes
+    invalid_config = {
+        "oauth_credentials": {
+            "refresh_token": "test_token",
+            # Missing client_id + client_secret for standard OAuth
+            # Missing refresh_proxy_url for proxy OAuth
+        },
+        "realm_id": "test-realm-id",
+        "start_date": datetime.datetime.now(datetime.timezone.utc).strftime(r"%Y-%m-%dT%H:%M:%SZ"),
+    }
+
+    # Schema validation should fail during tap initialization
+    with pytest.raises(ValueError):
+        tap = TapQuickBooks(config=invalid_config, validate_config=False)
+        tap.sync_all()
