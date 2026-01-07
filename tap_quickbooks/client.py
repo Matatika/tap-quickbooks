@@ -126,7 +126,7 @@ class QuickBooksStream(RESTStream):
             )
 
         msg = "Insufficient config to establish an authenticator. Must be one of {'oauth_credentials.client_id', 'oauth_credentials.client_secret', 'oauth_credentials.refresh_token'} or {'oauth_credentials.refresh_proxy_url', 'oauth_credentials.refresh_token'}."
-        raise RuntimeError(msg)
+        raise ValueError(msg)
 
     @property
     @override
