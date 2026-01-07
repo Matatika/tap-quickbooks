@@ -1,4 +1,4 @@
-"""Behavioral tests for proxy OAuth authentication."""
+"""Behavioral tests for authentication."""
 
 import datetime
 import json
