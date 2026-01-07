@@ -13,7 +13,7 @@ SAMPLE_CONFIG = {
         "refresh_token": "test_refresh_token",
     },
     "realm_id": "test_realm_id",
-    "start_date": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+    "start_date": datetime.datetime.now(datetime.timezone.utc).strftime(r"%Y-%m-%dT%H:%M:%SZ"),
     "sandbox": True,
 }
 

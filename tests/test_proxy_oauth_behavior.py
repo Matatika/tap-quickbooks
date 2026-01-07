@@ -19,7 +19,7 @@ PROXY_CONFIG: dict[str, Any] = {
         "refresh_token": "test_refresh_token_1234",
     },
     "realm_id": "test_realm_id",
-    "start_date": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+    "start_date": datetime.datetime.now(datetime.timezone.utc).strftime(r"%Y-%m-%dT%H:%M:%SZ"),
     "sandbox": True,
 }
 
@@ -31,7 +31,7 @@ STANDARD_CONFIG: dict[str, Any] = {
         "refresh_token": "test_refresh_token",
     },
     "realm_id": "test_realm_id",
-    "start_date": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+    "start_date": datetime.datetime.now(datetime.timezone.utc).strftime(r"%Y-%m-%dT%H:%M:%SZ"),
     "sandbox": True,
 }
 
@@ -129,7 +129,7 @@ def test_invalid_oauth_config_raises_validation_error():
             # Missing refresh_proxy_url for proxy OAuth
         },
         "realm_id": "test-realm-id",
-        "start_date": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "start_date": datetime.datetime.now(datetime.timezone.utc).strftime(r"%Y-%m-%dT%H:%M:%SZ"),
     }
 
     # Schema validation should fail during tap initialization
