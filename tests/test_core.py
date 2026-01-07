@@ -7,9 +7,11 @@ from singer_sdk.testing import get_tap_test_class
 from tap_quickbooks.tap import TapQuickBooks
 
 SAMPLE_CONFIG = {
-    "client_id": "test_client_id",
-    "client_secret": "test_client_secret",
-    "refresh_token": "test_refresh_token",
+    "oauth_credentials": {
+        "client_id": "test_client_id",
+        "client_secret": "test_client_secret",
+        "refresh_token": "test_refresh_token",
+    },
     "realm_id": "test_realm_id",
     "start_date": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
     "sandbox": True,
