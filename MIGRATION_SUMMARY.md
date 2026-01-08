@@ -38,9 +38,9 @@ All standard QuickBooks entity streams have been ported:
 
 #### 4. **Configuration**
 Required settings:
-- `client_id`: QuickBooks OAuth2 client ID
-- `client_secret`: QuickBooks OAuth2 client secret
-- `refresh_token`: OAuth2 refresh token
+- `oauth_credentials.client_id`: QuickBooks OAuth2 client ID
+- `oauth_credentials.client_secret`: QuickBooks OAuth2 client secret
+- `oauth_credentials.refresh_token`: OAuth2 refresh token
 - `realm_id`: QuickBooks company/realm identifier
 - `start_date`: Earliest record date to sync
 

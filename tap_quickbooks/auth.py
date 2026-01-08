@@ -3,10 +3,10 @@
 from __future__ import annotations
 
 import base64
+import json
 import sys
 
 from singer_sdk.authenticators import OAuthAuthenticator, SingletonMeta
-from singer_sdk.streams import Stream as RESTStreamBase
 
 if sys.version_info >= (3, 12):
     from typing import override
@@ -21,27 +21,16 @@ class QuickBooksAuthenticator(OAuthAuthenticator, metaclass=SingletonMeta):
 
     def __init__(
         self,
-        client_id: str,
-        client_secret: str,
-        refresh_token: str,
-        auth_endpoint: str,
-        oauth_scopes: str,
+        *args,
+        refresh_token=None,
+        **kwargs,
     ) -> None:
         """Initialize the authenticator.
 
         Args:
-            client_id: OAuth2 client ID.
-            client_secret: OAuth2 client secret.
             refresh_token: OAuth2 refresh token.
-            auth_endpoint: OAuth2 token endpoint URL.
-            oauth_scopes: OAuth scopes (not used by QuickBooks).
         """
-        super().__init__(
-            client_id=client_id,
-            client_secret=client_secret,
-            auth_endpoint=auth_endpoint,
-            oauth_scopes=oauth_scopes,
-        )
+        super().__init__(*args, **kwargs)
         self._oauth_headers = self.oauth_request_headers
         self._refresh_token = refresh_token
 
@@ -76,3 +65,25 @@ class QuickBooksAuthenticator(OAuthAuthenticator, metaclass=SingletonMeta):
             "grant_type": "refresh_token",
             "refresh_token": self._refresh_token,
         }
+
+class ProxyQuickBooksAuthenticator(QuickBooksAuthenticator, metaclass=SingletonMeta):
+    @override
+    def __init__(self, refresh_token=None, proxy_auth=None, **kwargs):
+        self._proxy_auth = proxy_auth
+
+        super().__init__(refresh_token=refresh_token, **kwargs)
+
+    @override
+    @property
+    def oauth_request_headers(self):
+        headers = {"Content-Type": "application/json"}
+
+        if self._proxy_auth:
+            headers["Authorization"] = self._proxy_auth
+
+        return headers
+
+    @override
+    @property
+    def oauth_request_body(self):
+        return json.dumps(super().oauth_request_body)
