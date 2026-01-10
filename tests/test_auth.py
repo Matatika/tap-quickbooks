@@ -139,7 +139,6 @@ def test_invalid_oauth_config_raises_validation_error():
 
 def test_invalid_oauth_config_raises_value_error_when_validation_skipped():
     """Test that incomplete OAuth configuration raises ValueError when schema validation is skipped."""
-
     # Config with oauth_credentials but missing required fields for both modes
     invalid_config = {
         "oauth_credentials": {

@@ -1,34 +1,40 @@
 {
   "type": "object",
   "properties": {
-    "HourlyRate": {
-      "type": [
-        "null",
-        "number"
-      ]
-    },
-    "CustomerRef": {
+    "Id": {
       "type": [
         "null",
         "string"
       ]
     },
-    "Taxable": {
+    "EmailStatus": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "POStatus": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "domain": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "sparse": {
       "type": [
         "null",
         "boolean"
       ]
     },
-    "Description": {
+    "SyncToken": {
       "type": [
         "null",
         "string"
-      ]
-    },
-    "Minutes": {
-      "type": [
-        "null",
-        "number"
       ]
     },
     "MetaData": {
@@ -53,19 +59,13 @@
         }
       }
     },
-    "ItemRef": {
+    "CustomField": {
       "type": [
         "null",
-        "string"
+        "array"
       ]
     },
-    "Id": {
-      "type": [
-        "null",
-        "string"
-      ]
-    },
-    "domain": {
+    "DocNumber": {
       "type": [
         "null",
         "string"
@@ -75,37 +75,54 @@
       "type": [
         "null",
         "string"
-      ],
-      "format": "date-time"
+      ]
     },
-    "EmployeeRef": {
+    "CurrencyRef": {
       "type": [
         "null",
         "string"
       ]
     },
-    "BillableStatus": {
+    "ExchangeRate": {
       "type": [
         "null",
         "string"
       ]
     },
-    "NameOf": {
+    "LinkedTxn": {
+      "type": [
+        "null",
+        "array"
+      ]
+    },
+    "Line": {
+      "type": [
+        "null",
+        "array"
+      ]
+    },
+    "VendorRef": {
       "type": [
         "null",
         "string"
       ]
     },
-    "ClassRef": {
+    "APAccountRef": {
       "type": [
         "null",
         "string"
       ]
     },
-    "Hours": {
+    "TotalAmt": {
       "type": [
         "null",
-        "number"
+        "string"
+      ]
+    },
+    "Memo": {
+      "type": [
+        "null",
+        "string"
       ]
     },
     "MetaData.CreateTime": {
@@ -123,5 +140,5 @@
       "format": "date-time"
     }
   },
-  "$id": "https://github.com/Matatika/tap-quickbooks/blob/main/tap_quickbooks/schemas/TimeActivity.json"
+  "$id": "https://github.com/Matatika/tap-quickbooks/blob/main/tap_quickbooks/schemas/purchase_order.json"
 }

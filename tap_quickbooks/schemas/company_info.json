@@ -7,82 +7,82 @@
         "string"
       ]
     },
-    "VendorRef": {
-      "type": [
-        "null",
-        "string"
-      ]
-    },
-    "Line": {
-      "type": [
-        "null",
-        "string"
-      ]
-    },
-    "TotalAmt": {
-      "type": [
-        "null",
-        "number"
-      ]
-    },
-    "PayType": {
-      "type": [
-        "null",
-        "string"
-      ]
-    },
     "SyncToken": {
       "type": [
         "null",
         "string"
       ]
     },
-    "CurrencyRef": {
+    "CompanyName": {
       "type": [
         "null",
         "string"
       ]
     },
-    "DocNumber": {
+    "CompanyAddr": {
       "type": [
         "null",
         "string"
       ]
     },
-    "PrivateNote": {
+    "LegalAddr": {
       "type": [
         "null",
         "string"
       ]
     },
-    "TxnDate": {
+    "SupportedLanguages": {
       "type": [
         "null",
         "string"
       ]
     },
-    "ExchangeRate": {
-      "type": [
-        "null",
-        "number"
-      ]
-    },
-    "APAccountRef": {
+    "Country": {
       "type": [
         "null",
         "string"
       ]
     },
-    "DepartmentRef": {
+    "Email": {
       "type": [
         "null",
         "string"
       ]
     },
-    "ProcessBillPayment": {
+    "WebAddr": {
       "type": [
         "null",
-        "boolean"
+        "string"
+      ]
+    },
+    "NameValue": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "FiscalYearStartMonth": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "CustomerCommunicationAddr": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "PrimaryPhone": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "LegalName": {
+      "type": [
+        "null",
+        "string"
       ]
     },
     "MetaData": {
@@ -107,13 +107,7 @@
         }
       }
     },
-    "CheckPayment": {
-      "type": [
-        "null",
-        "string"
-      ]
-    },
-    "CreditCardPayment": {
+    "CompanyStartDate": {
       "type": [
         "null",
         "string"
@@ -134,5 +128,5 @@
       "format": "date-time"
     }
   },
-  "$id": "https://github.com/Matatika/tap-quickbooks/blob/main/tap_quickbooks/schemas/BillPayment.json"
+  "$id": "https://github.com/Matatika/tap-quickbooks/blob/main/tap_quickbooks/schemas/company_info.json"
 }

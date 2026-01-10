@@ -8,7 +8,7 @@ from tap_quickbooks.client import QuickBooksStream
 class AccountsStream(QuickBooksStream):
     """Accounts stream."""
 
-    name = "Account"
+    name = "account"
     path = "/query"
     primary_keys = ("Id",)
     replication_key = "MetaData.LastUpdatedTime"
@@ -17,7 +17,7 @@ class AccountsStream(QuickBooksStream):
 class BillsStream(QuickBooksStream):
     """Bills stream."""
 
-    name = "Bill"
+    name = "bill"
     path = "/query"
     primary_keys = ("Id",)
     replication_key = "MetaData.LastUpdatedTime"
@@ -26,7 +26,7 @@ class BillsStream(QuickBooksStream):
 class BillPaymentsStream(QuickBooksStream):
     """BillPayments stream."""
 
-    name = "BillPayment"
+    name = "bill_payment"
     path = "/query"
     primary_keys = ("Id",)
     replication_key = "MetaData.LastUpdatedTime"
@@ -35,7 +35,7 @@ class BillPaymentsStream(QuickBooksStream):
 class BudgetsStream(QuickBooksStream):
     """Budgets stream."""
 
-    name = "Budget"
+    name = "budget"
     path = "/query"
     primary_keys = ("Id",)
     replication_key = "MetaData.LastUpdatedTime"
@@ -44,7 +44,7 @@ class BudgetsStream(QuickBooksStream):
 class ClassesStream(QuickBooksStream):
     """Classes stream."""
 
-    name = "Class"
+    name = "class"
     path = "/query"
     primary_keys = ("Id",)
     replication_key = "MetaData.LastUpdatedTime"
@@ -53,7 +53,7 @@ class ClassesStream(QuickBooksStream):
 class CompanyCurrencyStream(QuickBooksStream):
     """CompanyCurrency stream."""
 
-    name = "CompanyCurrency"
+    name = "company_currency"
     path = "/query"
     primary_keys = ("Id",)
     replication_key = "MetaData.LastUpdatedTime"
@@ -62,7 +62,7 @@ class CompanyCurrencyStream(QuickBooksStream):
 class CompanyInfoStream(QuickBooksStream):
     """CompanyInfo stream."""
 
-    name = "CompanyInfo"
+    name = "company_info"
     path = "/query"
     primary_keys = ("Id",)
     replication_key = None  # Full table replication
@@ -71,7 +71,7 @@ class CompanyInfoStream(QuickBooksStream):
 class CreditMemosStream(QuickBooksStream):
     """CreditMemos stream."""
 
-    name = "CreditMemo"
+    name = "credit_memo"
     path = "/query"
     primary_keys = ("Id",)
     replication_key = "MetaData.LastUpdatedTime"
@@ -80,7 +80,7 @@ class CreditMemosStream(QuickBooksStream):
 class CustomersStream(QuickBooksStream):
     """Customers stream."""
 
-    name = "Customer"
+    name = "customer"
     path = "/query"
     primary_keys = ("Id",)
     replication_key = "MetaData.LastUpdatedTime"
@@ -89,7 +89,7 @@ class CustomersStream(QuickBooksStream):
 class CustomerTypesStream(QuickBooksStream):
     """CustomerTypes stream."""
 
-    name = "CustomerType"
+    name = "customer_type"
     path = "/query"
     primary_keys = ("Id",)
     replication_key = "MetaData.LastUpdatedTime"
@@ -98,7 +98,7 @@ class CustomerTypesStream(QuickBooksStream):
 class DepartmentsStream(QuickBooksStream):
     """Departments stream."""
 
-    name = "Department"
+    name = "department"
     path = "/query"
     primary_keys = ("Id",)
     replication_key = "MetaData.LastUpdatedTime"
@@ -107,7 +107,7 @@ class DepartmentsStream(QuickBooksStream):
 class EmployeesStream(QuickBooksStream):
     """Employees stream."""
 
-    name = "Employee"
+    name = "employee"
     path = "/query"
     primary_keys = ("Id",)
     replication_key = "MetaData.LastUpdatedTime"
@@ -116,7 +116,7 @@ class EmployeesStream(QuickBooksStream):
 class EstimatesStream(QuickBooksStream):
     """Estimates stream."""
 
-    name = "Estimate"
+    name = "estimate"
     path = "/query"
     primary_keys = ("Id",)
     replication_key = "MetaData.LastUpdatedTime"
@@ -125,7 +125,7 @@ class EstimatesStream(QuickBooksStream):
 class InvoicesStream(QuickBooksStream):
     """Invoices stream."""
 
-    name = "Invoice"
+    name = "invoice"
     path = "/query"
     primary_keys = ("Id",)
     replication_key = "MetaData.LastUpdatedTime"
@@ -134,7 +134,7 @@ class InvoicesStream(QuickBooksStream):
 class ItemsStream(QuickBooksStream):
     """Items stream."""
 
-    name = "Item"
+    name = "item"
     path = "/query"
     primary_keys = ("Id",)
     replication_key = "MetaData.LastUpdatedTime"
@@ -143,7 +143,7 @@ class ItemsStream(QuickBooksStream):
 class JournalEntriesStream(QuickBooksStream):
     """JournalEntries stream."""
 
-    name = "JournalEntry"
+    name = "journal_entry"
     path = "/query"
     primary_keys = ("Id",)
     replication_key = "MetaData.LastUpdatedTime"
@@ -152,7 +152,7 @@ class JournalEntriesStream(QuickBooksStream):
 class PaymentsStream(QuickBooksStream):
     """Payments stream."""
 
-    name = "Payment"
+    name = "payment"
     path = "/query"
     primary_keys = ("Id",)
     replication_key = "MetaData.LastUpdatedTime"
@@ -161,7 +161,7 @@ class PaymentsStream(QuickBooksStream):
 class PaymentMethodsStream(QuickBooksStream):
     """PaymentMethods stream."""
 
-    name = "PaymentMethod"
+    name = "payment_method"
     path = "/query"
     primary_keys = ("Id",)
     replication_key = "MetaData.LastUpdatedTime"
@@ -170,7 +170,7 @@ class PaymentMethodsStream(QuickBooksStream):
 class PreferencesStream(QuickBooksStream):
     """Preferences stream."""
 
-    name = "Preferences"
+    name = "preferences"
     path = "/query"
     primary_keys = ("Id",)
     replication_key = None  # Full table replication
@@ -179,7 +179,7 @@ class PreferencesStream(QuickBooksStream):
 class PurchasesStream(QuickBooksStream):
     """Purchases stream."""
 
-    name = "Purchase"
+    name = "purchase"
     path = "/query"
     primary_keys = ("Id",)
     replication_key = "MetaData.LastUpdatedTime"
@@ -188,7 +188,7 @@ class PurchasesStream(QuickBooksStream):
 class PurchaseOrdersStream(QuickBooksStream):
     """PurchaseOrders stream."""
 
-    name = "PurchaseOrder"
+    name = "purchase_order"
     path = "/query"
     primary_keys = ("Id",)
     replication_key = "MetaData.LastUpdatedTime"
@@ -197,7 +197,7 @@ class PurchaseOrdersStream(QuickBooksStream):
 class SalesReceiptsStream(QuickBooksStream):
     """SalesReceipts stream."""
 
-    name = "SalesReceipt"
+    name = "sales_receipt"
     path = "/query"
     primary_keys = ("Id",)
     replication_key = "MetaData.LastUpdatedTime"
@@ -206,7 +206,7 @@ class SalesReceiptsStream(QuickBooksStream):
 class TaxCodesStream(QuickBooksStream):
     """TaxCodes stream."""
 
-    name = "TaxCode"
+    name = "tax_code"
     path = "/query"
     primary_keys = ("Id",)
     replication_key = None  # Full table replication per original tap
@@ -215,7 +215,7 @@ class TaxCodesStream(QuickBooksStream):
 class TaxRatesStream(QuickBooksStream):
     """TaxRates stream."""
 
-    name = "TaxRate"
+    name = "tax_rate"
     path = "/query"
     primary_keys = ("Id",)
     replication_key = None  # Full table replication per original tap
@@ -224,7 +224,7 @@ class TaxRatesStream(QuickBooksStream):
 class TermsStream(QuickBooksStream):
     """Terms stream."""
 
-    name = "Term"
+    name = "term"
     path = "/query"
     primary_keys = ("Id",)
     replication_key = "MetaData.LastUpdatedTime"
@@ -233,7 +233,7 @@ class TermsStream(QuickBooksStream):
 class TimeActivitiesStream(QuickBooksStream):
     """TimeActivities stream."""
 
-    name = "TimeActivity"
+    name = "time_activity"
     path = "/query"
     primary_keys = ("Id",)
     replication_key = "MetaData.LastUpdatedTime"
@@ -242,7 +242,7 @@ class TimeActivitiesStream(QuickBooksStream):
 class TransfersStream(QuickBooksStream):
     """Transfers stream."""
 
-    name = "Transfer"
+    name = "transfer"
     path = "/query"
     primary_keys = ("Id",)
     replication_key = "MetaData.LastUpdatedTime"
@@ -251,7 +251,7 @@ class TransfersStream(QuickBooksStream):
 class VendorsStream(QuickBooksStream):
     """Vendors stream."""
 
-    name = "Vendor"
+    name = "vendor"
     path = "/query"
     primary_keys = ("Id",)
     replication_key = "MetaData.LastUpdatedTime"
@@ -260,7 +260,7 @@ class VendorsStream(QuickBooksStream):
 class VendorCreditsStream(QuickBooksStream):
     """VendorCredits stream."""
 
-    name = "VendorCredit"
+    name = "vendor_credit"
     path = "/query"
     primary_keys = ("Id",)
     replication_key = "MetaData.LastUpdatedTime"

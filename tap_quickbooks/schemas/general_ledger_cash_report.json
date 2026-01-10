@@ -25,6 +25,12 @@
         "string"
       ]
     },
+    "Adj": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
     "CreateDate": {
       "type": [
         "null",
@@ -61,6 +67,42 @@
         "string"
       ]
     },
+    "Customer": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "CustomerId": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Vendor": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "VendorId": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Employee": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "EmployeeId": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
     "Location": {
       "type": [
         "null",
@@ -73,13 +115,13 @@
         "string"
       ]
     },
-    "Class": {
+    "Product/Service": {
       "type": [
         "null",
         "string"
       ]
     },
-    "ClassId": {
+    "Product/ServiceId": {
       "type": [
         "null",
         "string"
@@ -91,13 +133,67 @@
         "string"
       ]
     },
+    "Qty": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Rate": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Account#": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Account": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "AccountId": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
     "Split": {
       "type": [
         "null",
         "string"
       ]
     },
-    "SplitId": {
+    "InvoiceDate": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "A/RPaid": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "A/PPaid": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Clr": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "CheckPrinted": {
       "type": [
         "null",
         "string"
@@ -115,13 +211,7 @@
         "string"
       ]
     },
-    "PaymentMethod": {
-      "type": [
-        "null",
-        "string"
-      ]
-    },
-    "PaymentMethodId": {
+    "OpenBalance": {
       "type": [
         "null",
         "string"
@@ -130,13 +220,7 @@
     "Amount": {
       "type": [
         "null",
-        "number"
-      ]
-    },
-    "Balance": {
-      "type": [
-        "null",
-        "number"
+        "string"
       ]
     },
     "TaxName": {
@@ -157,30 +241,48 @@
         "string"
       ]
     },
+    "Klass": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "KlassId": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Class": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "ClassId": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
     "Categories": {
       "type": [
         "null",
         "array"
       ]
     },
-    "AccountId": {
+    "Department": {
       "type": [
         "null",
         "string"
       ]
     },
-    "Account": {
-      "type": [
-        "null",
-        "string"
-      ]
-    },
-    "Store": {
+    "DepartmentId": {
       "type": [
         "null",
         "string"
       ]
     }
   },
-  "$id": "https://github.com/Matatika/tap-quickbooks/blob/main/tap_quickbooks/schemas/ProfitAndLossDetailReport.json"
+  "$id": "https://github.com/Matatika/tap-quickbooks/blob/main/tap_quickbooks/schemas/general_ledger_cash_report.json"
 }
