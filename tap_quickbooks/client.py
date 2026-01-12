@@ -90,9 +90,6 @@ class QuickBooksStream(RESTStream):
         Returns:
             The entity name for QuickBooks API queries.
         """
-        if self.qb_entity_name:
-            return self.qb_entity_name
-
         # Convert snake_case stream name to PascalCase
         # e.g., "bill_payment" -> "BillPayment"
         return "".join(word.capitalize() for word in self.name.split("_"))
