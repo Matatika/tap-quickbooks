@@ -81,13 +81,11 @@ class QuickBooksStream(RESTStream):
     # Most QuickBooks objects use this replication key
     replication_key: str | None = "MetaData.LastUpdatedTime"
 
-    # QuickBooks API entity name (PascalCase)
-    # Override this in subclasses if different from the capitalized stream name
-    qb_entity_name: str | None = None
-
     @property
     def entity_name(self) -> str:
         """Get the QuickBooks API entity name (PascalCase).
+
+        Override this in subclasses if different from the capitalized stream name.
 
         Returns:
             The entity name for QuickBooks API queries.
