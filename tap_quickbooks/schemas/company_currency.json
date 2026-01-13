@@ -1,19 +1,19 @@
 {
   "type": "object",
   "properties": {
+    "Id": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
     "Name": {
       "type": [
         "null",
         "string"
       ]
     },
-    "SyncToken": {
-      "type": [
-        "null",
-        "string"
-      ]
-    },
-    "Type": {
+    "Code": {
       "type": [
         "null",
         "string"
@@ -25,7 +25,19 @@
         "boolean"
       ]
     },
-    "Id": {
+    "domain": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "sparse": {
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    "SyncToken": {
       "type": [
         "null",
         "string"
@@ -68,5 +80,5 @@
       "format": "date-time"
     }
   },
-  "$id": "https://github.com/Matatika/tap-quickbooks/blob/main/tap_quickbooks/schemas/PaymentMethod.json"
+  "$id": "https://github.com/Matatika/tap-quickbooks/blob/main/tap_quickbooks/schemas/company_currency.json"
 }

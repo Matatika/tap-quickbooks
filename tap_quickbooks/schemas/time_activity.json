@@ -1,64 +1,22 @@
 {
   "type": "object",
   "properties": {
-    "Name": {
+    "HourlyRate": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "CustomerRef": {
       "type": [
         "null",
         "string"
       ]
     },
-    "SyncToken": {
-      "type": [
-        "null",
-        "string"
-      ]
-    },
-    "RateValue": {
-      "type": [
-        "null",
-        "string"
-      ]
-    },
-    "AgencyRef": {
-      "type": [
-        "null",
-        "string"
-      ]
-    },
-    "SpecialTaxType": {
-      "type": [
-        "null",
-        "string"
-      ]
-    },
-    "EffectiveTaxRate": {
-      "type": [
-        "null",
-        "string"
-      ]
-    },
-    "DisplayType": {
-      "type": [
-        "null",
-        "string"
-      ]
-    },
-    "TaxReturnLineRef": {
-      "type": [
-        "null",
-        "string"
-      ]
-    },
-    "Active": {
+    "Taxable": {
       "type": [
         "null",
         "boolean"
-      ]
-    },
-    "OriginalTaxRate": {
-      "type": [
-        "null",
-        "string"
       ]
     },
     "Description": {
@@ -67,10 +25,10 @@
         "string"
       ]
     },
-    "Id": {
+    "Minutes": {
       "type": [
         "null",
-        "string"
+        "number"
       ]
     },
     "MetaData": {
@@ -95,6 +53,61 @@
         }
       }
     },
+    "ItemRef": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Id": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "domain": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "TxnDate": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "date-time"
+    },
+    "EmployeeRef": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "BillableStatus": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "NameOf": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "ClassRef": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Hours": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
     "MetaData.CreateTime": {
       "type": [
         "null",
@@ -110,5 +123,5 @@
       "format": "date-time"
     }
   },
-  "$id": "https://github.com/Matatika/tap-quickbooks/blob/main/tap_quickbooks/schemas/TaxRate.json"
+  "$id": "https://github.com/Matatika/tap-quickbooks/blob/main/tap_quickbooks/schemas/time_activity.json"
 }

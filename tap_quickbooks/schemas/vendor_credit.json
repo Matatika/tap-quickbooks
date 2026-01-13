@@ -1,114 +1,132 @@
 {
   "type": "object",
   "properties": {
-    "Date": {
+    "Id": {
       "type": [
         "null",
         "string"
       ]
     },
-    "TransactionTypeId": {
+    "Balance": {
       "type": [
         "null",
         "string"
       ]
     },
-    "TransactionType": {
+    "domain": {
       "type": [
         "null",
         "string"
       ]
     },
-    "Num": {
+    "sparse": {
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    "SyncToken": {
       "type": [
         "null",
         "string"
       ]
     },
-    "Posting": {
+    "MetaData": {
+      "type": [
+        "null",
+        "object"
+      ],
+      "properties": {
+        "CreateTime": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "format": "date-time"
+        },
+        "LastUpdatedTime": {
+          "type": [
+            "null",
+            "string"
+          ],
+          "format": "date-time"
+        }
+      }
+    },
+    "DocNumber": {
       "type": [
         "null",
         "string"
       ]
     },
-    "NameId": {
+    "TxnDate": {
       "type": [
         "null",
         "string"
       ]
     },
-    "Name": {
+    "DepartmentRef": {
       "type": [
         "null",
         "string"
       ]
     },
-    "Memo": {
+    "CurrencyRef": {
       "type": [
         "null",
         "string"
       ]
     },
-    "AccountId": {
+    "ExchangeRate": {
       "type": [
         "null",
         "string"
       ]
     },
-    "Account": {
+    "PrivateNote": {
       "type": [
         "null",
         "string"
       ]
     },
-    "SplitId": {
-      "type": [
-        "null",
-        "string"
-      ]
-    },
-    "Split": {
-      "type": [
-        "null",
-        "string"
-      ]
-    },
-    "Class": {
-      "type": [
-        "null",
-        "string"
-      ]
-    },
-    "ClassId": {
-      "type": [
-        "null",
-        "string"
-      ]
-    },
-    "LocationId": {
-      "type": [
-        "null",
-        "string"
-      ]
-    },
-    "Location": {
-      "type": [
-        "null",
-        "string"
-      ]
-    },
-    "Amount": {
-      "type": [
-        "null",
-        "number"
-      ]
-    },
-    "Categories": {
+    "Line": {
       "type": [
         "null",
         "array"
       ]
+    },
+    "VendorRef": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "APAccountRef": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "TotalAmt": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "MetaData.CreateTime": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "date-time"
+    },
+    "MetaData.LastUpdatedTime": {
+      "type": [
+        "null",
+        "string"
+      ],
+      "format": "date-time"
     }
   },
-  "$id": "https://github.com/Matatika/tap-quickbooks/blob/main/tap_quickbooks/schemas/TransactionListReport.json"
+  "$id": "https://github.com/Matatika/tap-quickbooks/blob/main/tap_quickbooks/schemas/vendor_credit.json"
 }

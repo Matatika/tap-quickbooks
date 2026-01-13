@@ -1,13 +1,37 @@
 {
   "type": "object",
   "properties": {
+    "Id": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
     "Name": {
       "type": [
         "null",
         "string"
       ]
     },
-    "SyncToken": {
+    "PurchaseTaxRateList": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "SalesTaxRateList": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "TaxGroup": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Taxable": {
       "type": [
         "null",
         "string"
@@ -16,10 +40,16 @@
     "Active": {
       "type": [
         "null",
-        "boolean"
+        "string"
       ]
     },
-    "Id": {
+    "Description": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "Hidden": {
       "type": [
         "null",
         "string"
@@ -47,6 +77,12 @@
         }
       }
     },
+    "TaxCodeConfigType": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
     "MetaData.CreateTime": {
       "type": [
         "null",
@@ -62,5 +98,5 @@
       "format": "date-time"
     }
   },
-  "$id": "https://github.com/Matatika/tap-quickbooks/blob/main/tap_quickbooks/schemas/CustomerType.json"
+  "$id": "https://github.com/Matatika/tap-quickbooks/blob/main/tap_quickbooks/schemas/tax_code.json"
 }

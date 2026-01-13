@@ -1,12 +1,6 @@
 {
   "type": "object",
   "properties": {
-    "RemainingCredit": {
-      "type": [
-        "null",
-        "number"
-      ]
-    },
     "Id": {
       "type": [
         "null",
@@ -66,19 +60,19 @@
         "string"
       ]
     },
-    "ClassRef": {
-      "type": [
-        "null",
-        "string"
-      ]
-    },
     "Line": {
       "type": [
         "null",
         "array"
       ]
     },
-    "CustomerMemo": {
+    "FreeFormAddress": {
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    "ShipFromAddr": {
       "type": [
         "null",
         "string"
@@ -88,6 +82,18 @@
       "type": [
         "null",
         "number"
+      ]
+    },
+    "ApplyTaxAfterDiscount": {
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    "PrintStatus": {
+      "type": [
+        "null",
+        "string"
       ]
     },
     "Balance": {
@@ -111,5 +117,5 @@
       "format": "date-time"
     }
   },
-  "$id": "https://github.com/Matatika/tap-quickbooks/blob/main/tap_quickbooks/schemas/CreditMemo.json"
+  "$id": "https://github.com/Matatika/tap-quickbooks/blob/main/tap_quickbooks/schemas/sales_receipt.json"
 }

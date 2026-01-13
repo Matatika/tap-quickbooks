@@ -1,10 +1,10 @@
 {
   "type": "object",
   "properties": {
-    "Total": {
+    "Account": {
       "type": [
         "null",
-        "number"
+        "string"
       ]
     },
     "Categories": {
@@ -13,12 +13,12 @@
         "array"
       ]
     },
-    "Account": {
+    "MonthlyTotal": {
       "type": [
         "null",
-        "string"
+        "array"
       ]
     }
   },
-  "$id": "https://github.com/Matatika/tap-quickbooks/blob/main/tap_quickbooks/schemas/ProfitAndLossReport.json"
+  "$id": "https://github.com/Matatika/tap-quickbooks/blob/main/tap_quickbooks/schemas/monthly_balance_sheet_report.json"
 }

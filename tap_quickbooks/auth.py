@@ -66,6 +66,7 @@ class QuickBooksAuthenticator(OAuthAuthenticator, metaclass=SingletonMeta):
             "refresh_token": self._refresh_token,
         }
 
+
 class ProxyQuickBooksAuthenticator(QuickBooksAuthenticator, metaclass=SingletonMeta):
     @override
     def __init__(self, refresh_token=None, proxy_auth=None, **kwargs):

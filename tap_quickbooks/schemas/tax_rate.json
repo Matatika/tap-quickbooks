@@ -1,7 +1,7 @@
 {
   "type": "object",
   "properties": {
-    "Id": {
+    "Name": {
       "type": [
         "null",
         "string"
@@ -13,73 +13,61 @@
         "string"
       ]
     },
-    "CompanyName": {
+    "RateValue": {
       "type": [
         "null",
         "string"
       ]
     },
-    "CompanyAddr": {
+    "AgencyRef": {
       "type": [
         "null",
         "string"
       ]
     },
-    "LegalAddr": {
+    "SpecialTaxType": {
       "type": [
         "null",
         "string"
       ]
     },
-    "SupportedLanguages": {
+    "EffectiveTaxRate": {
       "type": [
         "null",
         "string"
       ]
     },
-    "Country": {
+    "DisplayType": {
       "type": [
         "null",
         "string"
       ]
     },
-    "Email": {
+    "TaxReturnLineRef": {
       "type": [
         "null",
         "string"
       ]
     },
-    "WebAddr": {
+    "Active": {
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    "OriginalTaxRate": {
       "type": [
         "null",
         "string"
       ]
     },
-    "NameValue": {
+    "Description": {
       "type": [
         "null",
         "string"
       ]
     },
-    "FiscalYearStartMonth": {
-      "type": [
-        "null",
-        "string"
-      ]
-    },
-    "CustomerCommunicationAddr": {
-      "type": [
-        "null",
-        "string"
-      ]
-    },
-    "PrimaryPhone": {
-      "type": [
-        "null",
-        "string"
-      ]
-    },
-    "LegalName": {
+    "Id": {
       "type": [
         "null",
         "string"
@@ -107,12 +95,6 @@
         }
       }
     },
-    "CompanyStartDate": {
-      "type": [
-        "null",
-        "string"
-      ]
-    },
     "MetaData.CreateTime": {
       "type": [
         "null",
@@ -128,5 +110,5 @@
       "format": "date-time"
     }
   },
-  "$id": "https://github.com/Matatika/tap-quickbooks/blob/main/tap_quickbooks/schemas/CompanyInfo.json"
+  "$id": "https://github.com/Matatika/tap-quickbooks/blob/main/tap_quickbooks/schemas/tax_rate.json"
 }
