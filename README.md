@@ -41,6 +41,8 @@ uv tool install git+https://github.com/Matatika/tap-quickbooks.git
 | start_date | True | None | The earliest record date to sync (RFC3339 format) |
 | user_agent | False | None | Custom User-Agent header to send with each request |
 | sandbox | False | False | Whether to use the QuickBooks sandbox environment |
+| include_inactive | False | False | Whether to include inactive records for entities with an `Active` field, which QuickBooks omits by default. See [Deleted and inactive records](#deleted-and-inactive-records) |
+| capture_deletes | False | False | Whether to capture records deleted in QuickBooks, using the Change Data Capture (CDC) endpoint. See [Deleted and inactive records](#deleted-and-inactive-records) |
 | stream_maps | False | None | Config object for stream maps capability |
 | stream_map_config | False | None | User-defined config values to be used within map expressions |
 | flattening_enabled | False | None | 'True' to enable schema flattening and automatically expand nested properties |
@@ -254,6 +256,49 @@ develop your own taps and targets.
 - Full table replication for configuration streams
 - State management for resumable syncs
 - Proper primary key handling
+- Optional inclusion of inactive records for entities with an `Active` field (`include_inactive`)
+- Optional capture of deleted records via Change Data Capture (`capture_deletes`)
+
+### Deleted and inactive records
+
+QuickBooks handles removal in two ways:
+
+- **Inactive records.** List entities (`Account`, `Customer`, `Vendor`, `Item`, `Employee`,
+  `Class`, `Department`, `Term`, `PaymentMethod`, `TaxCode`, `TaxRate` and so on) are not
+  deleted. Deleting one in the QuickBooks UI makes it inactive (`Active` is `false`). QuickBooks
+  queries only return active records by default, so without `include_inactive` a record that
+  becomes inactive stops being synced, and the destination keeps its last active version. With
+  `include_inactive` set to `true`, the tap queries with `Active IN (true, false)` and emits
+  inactive records like any other record, with `Active` set to `false`. Turning it on for an
+  existing pipeline also emits records that were already inactive before it was turned on.
+- **Deleted records.** Transactions (`Invoice`, `Bill`, `Payment`, `JournalEntry` and so on) are
+  removed, and queries no longer return them. With `capture_deletes` set to `true`, after each
+  incremental stream is synced, the tap asks the
+  [Change Data Capture (CDC) endpoint](https://developer.intuit.com/app/developer/qbo/docs/learn/explore-the-quickbooks-online-api/change-data-capture)
+  for records of that entity deleted since the stream's bookmark. Each one is emitted with only
+  `Id`, `MetaData` and `_sdc_deleted_at` set, and `_sdc_deleted_at` is set to the time it was
+  deleted. `_sdc_deleted_at` is added to the schema of incremental streams when the setting is
+  on.
+
+To remove or flag deleted records in the destination, use a target that acts on
+`_sdc_deleted_at`. For Meltano SDK targets, either set `hard_delete: true` to remove them, or
+`add_record_metadata: true` to keep them with `_sdc_deleted_at` set.
+
+Voided transactions are not deleted: QuickBooks sets their amounts to zero, and they are emitted
+as normal updates.
+
+Limitations of `capture_deletes`:
+
+- **30-day lookback.** QuickBooks only keeps 30 days of changes. If a stream's bookmark is older
+  than that, the tap warns and only captures deletes from the last 30 days. Sync at least every
+  30 days, or run a full refresh of the stream to remove older deletes.
+- **1,000 changes per sync.** CDC returns at most 1,000 changed records per entity, with no
+  pagination. If an entity has more changes than that since its bookmark, the tap warns that some
+  deletes may be missing. Sync more often to stay under the limit.
+- **No deletes on the first sync.** Deleted records are only requested once a stream has a
+  bookmark. Records deleted before the first sync were never extracted, so there is nothing to
+  remove.
+- **Full-table streams** (`CompanyInfo`, `Preferences`, `TaxCode`, `TaxRate`) do not use CDC.
 
 ### Pagination
 
@@ -310,7 +355,7 @@ If you encounter schema validation errors:
 Potential future enhancements:
 
 - [ ] Report streams (BalanceSheet, CashFlow, ProfitAndLoss, etc.)
-- [ ] Deleted records tracking
+- [x] Deleted records tracking
 - [ ] Attachable stream with file downloads
 - [ ] Query timeout retry logic with date chunking
 - [ ] Rate limit backoff handling

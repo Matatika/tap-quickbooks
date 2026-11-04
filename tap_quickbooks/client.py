@@ -2,15 +2,16 @@
 
 from __future__ import annotations
 
+import datetime as dt
 import decimal
 import sys
 from functools import cached_property
-from typing import TYPE_CHECKING, Any, ClassVar
+from typing import TYPE_CHECKING, Any, ClassVar, TypeVar
 
 from singer_sdk import SchemaDirectory, StreamSchema
 from singer_sdk.helpers.jsonpath import extract_jsonpath
 from singer_sdk.pagination import BaseOffsetPaginator
-from singer_sdk.streams import RESTStream
+from singer_sdk.streams import RESTStream, Stream
 
 from tap_quickbooks import schemas
 from tap_quickbooks.auth import ProxyQuickBooksAuthenticator, QuickBooksAuthenticator
@@ -28,6 +29,49 @@ if TYPE_CHECKING:
 
 
 SCHEMAS_DIR = SchemaDirectory(schemas)
+
+_TStream = TypeVar("_TStream", bound=Stream)
+
+# QuickBooks CDC only accepts a ``changedSince`` up to 30 days in the past
+CDC_MAX_LOOKBACK = dt.timedelta(days=30)
+# Margin so a request built right at the limit is not rejected by the time it arrives
+CDC_LOOKBACK_MARGIN = dt.timedelta(minutes=5)
+# QuickBooks CDC returns at most this many objects per entity, with no pagination
+CDC_MAX_RESULTS = 1000
+
+SDC_DELETED_AT = "_sdc_deleted_at"
+
+
+class QuickBooksStreamSchema(StreamSchema):
+    """Stream schema that adds ``_sdc_deleted_at`` when deletes are captured."""
+
+    @override
+    def get_stream_schema(
+        self,
+        stream: _TStream,
+        stream_class: type[_TStream],
+    ) -> dict[str, Any]:
+        """Get the stream schema, adding ``_sdc_deleted_at`` if deletes are captured.
+
+        Args:
+            stream: The stream instance to get the schema from.
+            stream_class: The stream class to get the schema from.
+
+        Returns:
+            A JSON schema dictionary.
+        """
+        schema = super().get_stream_schema(stream, stream_class)
+
+        if not getattr(stream, "capture_deletes", False):
+            return schema
+
+        return {
+            **schema,
+            "properties": {
+                **schema["properties"],
+                SDC_DELETED_AT: {"type": ["null", "string"], "format": "date-time"},
+            },
+        }
 
 
 class QuickBooksPaginator(BaseOffsetPaginator):
@@ -76,7 +120,7 @@ class QuickBooksStream(RESTStream):
     # Page size for QuickBooks API (max 1000)
     page_size = 100
 
-    schema: ClassVar[StreamSchema] = StreamSchema(SCHEMAS_DIR)
+    schema: ClassVar[StreamSchema] = QuickBooksStreamSchema(SCHEMAS_DIR)
 
     # Most QuickBooks objects use this replication key
     replication_key: str | None = "MetaData.LastUpdatedTime"
@@ -93,6 +137,33 @@ class QuickBooksStream(RESTStream):
         # Convert snake_case stream name to PascalCase
         # e.g., "bill_payment" -> "BillPayment"
         return "".join(word.capitalize() for word in self.name.split("_"))
+
+    @property
+    def capture_deletes(self) -> bool:
+        """Whether deleted records are captured for this stream via the CDC endpoint.
+
+        Only incremental streams capture deletes, since the CDC lookback is bounded
+        by the stream bookmark.
+
+        Returns:
+            True if deleted records should be captured.
+        """
+        return bool(self.replication_key and self.config.get("capture_deletes", False))
+
+    @property
+    def include_inactive(self) -> bool:
+        """Whether inactive records are queried for this stream.
+
+        QuickBooks only returns active records for entities with an ``Active`` field
+        unless the query filters on ``Active`` explicitly, and records "deleted" in the
+        QuickBooks UI are made inactive rather than removed.
+
+        Returns:
+            True if the entity has an ``Active`` field and inactive records are included.
+        """
+        return bool(
+            self.config.get("include_inactive", False) and "Active" in self.schema["properties"]
+        )
 
     @override
     @property
@@ -187,6 +258,10 @@ class QuickBooksStream(RESTStream):
         # Build the SQL-like query for QuickBooks
         query_parts = []
 
+        # Include inactive records, which QuickBooks omits by default
+        if self.include_inactive:
+            query_parts.append("Active IN (true, false)")
+
         # Add replication key filter for incremental sync
         start_date = self.get_starting_timestamp(context)
         if start_date:
@@ -214,6 +289,114 @@ class QuickBooksStream(RESTStream):
         params["minorversion"] = "65"  # QuickBooks API minor version
 
         return params
+
+    @override
+    def get_records(self, context: Context | None) -> Iterable[dict[str, Any]]:
+        """Return records, followed by deleted records if deletes are captured.
+
+        Args:
+            context: The stream context.
+
+        Yields:
+            Each record from the source.
+        """
+        # read before any records are emitted, so they reflect the last run's bookmark
+        has_bookmark = bool(self.get_context_state(context).get("replication_key_value"))
+        changed_since = self.get_starting_timestamp(context)
+
+        yield from super().get_records(context)
+
+        if not self.capture_deletes:
+            return
+
+        if not has_bookmark or not changed_since:
+            # first sync: records deleted before now were never extracted
+            self.logger.info("No bookmark for stream '%s', skipping deleted records", self.name)
+            return
+
+        yield from self.get_deleted_records(context, changed_since=changed_since)
+
+    def get_deleted_records(
+        self,
+        context: Context | None,
+        changed_since: dt.datetime,
+    ) -> Iterable[dict[str, Any]]:
+        """Get records deleted since a point in time from the CDC endpoint.
+
+        Args:
+            context: The stream context.
+            changed_since: Point in time to get deleted records from.
+
+        Yields:
+            Each deleted record, with ``_sdc_deleted_at`` set.
+        """
+        earliest = dt.datetime.now(dt.timezone.utc) - CDC_MAX_LOOKBACK
+        earliest += CDC_LOOKBACK_MARGIN
+
+        if changed_since < earliest:
+            self.logger.warning(
+                "Bookmark for stream '%s' (%s) is older than the %s-day CDC lookback "
+                "limit: records deleted before %s cannot be captured. Run a full refresh "
+                "of this stream to remove them.",
+                self.name,
+                changed_since.isoformat(),
+                CDC_MAX_LOOKBACK.days,
+                earliest.isoformat(),
+            )
+            changed_since = earliest
+
+        prepared_request = self.build_prepared_request(
+            method="GET",
+            url=f"{self.url_base}/cdc",
+            params={
+                "entities": self.entity_name,
+                "changedSince": changed_since.isoformat(),
+                "minorversion": "65",
+            },
+            headers=self.http_headers,
+        )
+        response = self.request_decorator(self._request)(prepared_request, context)
+
+        changed = list(self.parse_cdc_response(response))
+
+        if len(changed) >= CDC_MAX_RESULTS:
+            self.logger.warning(
+                "CDC returned the maximum of %s changed records for stream '%s' since "
+                "%s: some deleted records may be missing. Sync more often to keep the "
+                "number of changes between runs below this limit.",
+                CDC_MAX_RESULTS,
+                self.name,
+                changed_since.isoformat(),
+            )
+
+        deleted = [r for r in changed if r.get("status") == "Deleted"]
+        self.logger.info(
+            "Found %s deleted record(s) for stream '%s' since %s",
+            len(deleted),
+            self.name,
+            changed_since.isoformat(),
+        )
+
+        for record in deleted:
+            metadata = record.get("MetaData") or {}
+            yield {
+                "Id": record["Id"],
+                "MetaData": metadata,
+                SDC_DELETED_AT: metadata.get("LastUpdatedTime"),
+            }
+
+    def parse_cdc_response(self, response: requests.Response) -> Iterable[dict]:
+        """Parse changed records for this stream's entity from a CDC response.
+
+        Args:
+            response: The HTTP ``requests.Response`` object.
+
+        Yields:
+            Each changed record (updated or deleted).
+        """
+        for cdc_response in response.json().get("CDCResponse", []):
+            for query_response in cdc_response.get("QueryResponse", []):
+                yield from query_response.get(self.entity_name, [])
 
     @override
     def parse_response(self, response: requests.Response) -> Iterable[dict]:
