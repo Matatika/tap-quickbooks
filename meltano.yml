@@ -66,7 +66,8 @@ plugins:
         Customer, Vendor, Item and Account), which QuickBooks omits by default. Records
         deleted in the QuickBooks UI for these entities are made inactive rather than
         removed, and are emitted with `Active` set to false. Turning this on for an existing
-        pipeline also emits records that were already inactive.
+        pipeline only emits records that change after the stream's bookmark, so run a full
+        refresh to also emit records that were already inactive.
       value: false
 
     - name: capture_deletes
@@ -75,10 +76,11 @@ plugins:
       description: >-
         Whether to capture records deleted in QuickBooks (such as invoices, bills and
         payments), using the Change Data Capture (CDC) endpoint. Deleted records are emitted
-        with only `Id`, `MetaData` and `_sdc_deleted_at` set, so the target must act on
-        `_sdc_deleted_at` (`hard_delete: true` to remove them, or `add_record_metadata: true`
-        to keep them flagged). Only applies to incremental streams once they have a bookmark.
-        QuickBooks only keeps 30 days of changes, so sync at least that often.
+        with only `Id`, `MetaData` and `_sdc_deleted_at` set, so use a target that deletes rows
+        with `_sdc_deleted_at` set (such as the pipelinewise-based target-postgres with
+        `hard_delete: true`). Most Meltano SDK targets upsert them instead, which overwrites the
+        row's other columns with null. Only applies to incremental streams after their first
+        sync. QuickBooks only keeps 30 days of changes, so sync at least that often.
       value: false
 
     settings_group_validation:

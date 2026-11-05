@@ -7,8 +7,11 @@ import decimal
 import sys
 from functools import cached_property
 from typing import TYPE_CHECKING, Any, ClassVar, TypeVar
+from urllib.parse import urlparse
 
+import requests
 from singer_sdk import SchemaDirectory, StreamSchema
+from singer_sdk.exceptions import FatalAPIError, RetriableAPIError
 from singer_sdk.helpers.jsonpath import extract_jsonpath
 from singer_sdk.pagination import BaseOffsetPaginator
 from singer_sdk.streams import RESTStream, Stream
@@ -24,8 +27,7 @@ else:
 if TYPE_CHECKING:
     from collections.abc import Iterable
 
-    import requests
-    from singer_sdk.helpers.types import Auth, Context
+    from singer_sdk.helpers.types import Auth, Context, Record
 
 
 SCHEMAS_DIR = SchemaDirectory(schemas)
@@ -39,7 +41,17 @@ CDC_LOOKBACK_MARGIN = dt.timedelta(minutes=5)
 # QuickBooks CDC returns at most this many objects per entity, with no pagination
 CDC_MAX_RESULTS = 1000
 
+# Overlap between consecutive CDC windows, to allow for clock skew with QuickBooks
+CDC_CHECKPOINT_MARGIN = dt.timedelta(minutes=5)
+
 SDC_DELETED_AT = "_sdc_deleted_at"
+
+# Stream state key holding the time from which the next CDC request should start
+CDC_CHECKPOINT_KEY = "cdc_checkpoint"
+
+
+class ActiveFilterRejectedError(FatalAPIError):
+    """QuickBooks rejected a query that filters on ``Active``."""
 
 
 class QuickBooksStreamSchema(StreamSchema):
@@ -125,6 +137,9 @@ class QuickBooksStream(RESTStream):
     # Most QuickBooks objects use this replication key
     replication_key: str | None = "MetaData.LastUpdatedTime"
 
+    # Set when QuickBooks rejects the ``Active`` filter for this stream's entity
+    _active_filter_rejected = False
+
     @property
     def entity_name(self) -> str:
         """Get the QuickBooks API entity name (PascalCase).
@@ -162,7 +177,9 @@ class QuickBooksStream(RESTStream):
             True if the entity has an ``Active`` field and inactive records are included.
         """
         return bool(
-            self.config.get("include_inactive", False) and "Active" in self.schema["properties"]
+            self.config.get("include_inactive", False)
+            and "Active" in self.schema["properties"]
+            and not self._active_filter_rejected
         )
 
     @override
@@ -291,6 +308,26 @@ class QuickBooksStream(RESTStream):
         return params
 
     @override
+    def validate_response(self, response: requests.Response) -> None:
+        """Validate a response, flagging a query rejected because of the ``Active`` filter.
+
+        Args:
+            response: The HTTP ``requests.Response`` object.
+
+        Raises:
+            ActiveFilterRejectedError: If a query that filters on ``Active`` is rejected.
+        """
+        if (
+            response.status_code == requests.codes.bad_request
+            and self.include_inactive
+            and urlparse(str(response.request.url)).path.endswith(self.path or "/query")
+        ):
+            msg = f"QuickBooks rejected the query with the Active filter: {response.text}"
+            raise ActiveFilterRejectedError(msg)
+
+        super().validate_response(response)
+
+    @override
     def get_records(self, context: Context | None) -> Iterable[dict[str, Any]]:
         """Return records, followed by deleted records if deletes are captured.
 
@@ -300,21 +337,119 @@ class QuickBooksStream(RESTStream):
         Yields:
             Each record from the source.
         """
-        # read before any records are emitted, so they reflect the last run's bookmark
-        has_bookmark = bool(self.get_context_state(context).get("replication_key_value"))
-        changed_since = self.get_starting_timestamp(context)
+        # read before any records are emitted, so they reflect the last run
+        state = self.get_context_state(context)
+        changed_since = self.get_cdc_changed_since(context)
+        # every deletion from here on is captured by this run or the next one
+        checkpoint = dt.datetime.now(dt.timezone.utc) - CDC_CHECKPOINT_MARGIN
 
-        yield from super().get_records(context)
+        yield from self._get_query_records(context)
 
         if not self.capture_deletes:
             return
 
-        if not has_bookmark or not changed_since:
+        if changed_since is None:
             # first sync: records deleted before now were never extracted
-            self.logger.info("No bookmark for stream '%s', skipping deleted records", self.name)
+            self.logger.info(
+                "No CDC checkpoint for stream '%s', skipping deleted records", self.name
+            )
+            state[CDC_CHECKPOINT_KEY] = checkpoint.isoformat()
             return
 
-        yield from self.get_deleted_records(context, changed_since=changed_since)
+        try:
+            deleted = list(self.get_deleted_records(context, changed_since=changed_since))
+        except (FatalAPIError, RetriableAPIError, requests.exceptions.RequestException) as e:
+            # keep the previous checkpoint, so the next run requests the same deletes again
+            self.logger.warning(
+                "Could not get deleted records for stream '%s' since %s, they will be "
+                "requested again on the next run: %s",
+                self.name,
+                changed_since.isoformat(),
+                e,
+            )
+            return
+
+        yield from deleted
+        state[CDC_CHECKPOINT_KEY] = checkpoint.isoformat()
+
+    def _get_query_records(self, context: Context | None) -> Iterable[dict[str, Any]]:
+        """Return records from the query endpoint.
+
+        Falls back to querying active records only if QuickBooks rejects the ``Active``
+        filter for this entity.
+
+        Args:
+            context: The stream context.
+
+        Yields:
+            Each record from the query endpoint.
+
+        Raises:
+            ActiveFilterRejectedError: If the filter is rejected after records were emitted.
+        """
+        emitted = False
+        try:
+            for record in super().get_records(context):
+                emitted = True
+                yield record
+        except ActiveFilterRejectedError as e:
+            if emitted:
+                raise
+
+            self.logger.warning(
+                "QuickBooks does not support filtering '%s' on Active, so inactive records "
+                "cannot be included for stream '%s': %s",
+                self.entity_name,
+                self.name,
+                e,
+            )
+            self._active_filter_rejected = True
+            yield from super().get_records(context)
+
+    def get_cdc_changed_since(self, context: Context | None) -> dt.datetime | None:
+        """Get the point in time to request deleted records from.
+
+        This is the checkpoint saved by the last run that requested deleted records or,
+        for a stream synced before deletes were captured, its bookmark.
+
+        Args:
+            context: The stream context.
+
+        Returns:
+            The point in time to request deleted records from, or ``None`` if the stream
+            has not been synced yet.
+        """
+        state = self.get_context_state(context)
+
+        if checkpoint := state.get(CDC_CHECKPOINT_KEY):
+            return dt.datetime.fromisoformat(checkpoint)
+
+        if state.get("replication_key_value"):
+            return self.get_starting_timestamp(context)
+
+        return None
+
+    @override
+    def _increment_stream_state(
+        self,
+        latest_record: Record,
+        *,
+        context: Context | None = None,
+    ) -> None:
+        """Update the stream bookmark from a record, unless it is a deleted record.
+
+        Deleted records are requested after the query has finished, so their deletion
+        time says nothing about which updates the query has extracted. Advancing the
+        bookmark with it would skip records updated in between.
+
+        Args:
+            latest_record: The record to update the bookmark from.
+            context: The stream context.
+        """
+        if latest_record.get(SDC_DELETED_AT):
+            return
+
+        super()._increment_stream_state(latest_record, context=context)
 
     def get_deleted_records(
         self,
@@ -335,9 +470,9 @@ class QuickBooksStream(RESTStream):
 
         if changed_since < earliest:
             self.logger.warning(
-                "Bookmark for stream '%s' (%s) is older than the %s-day CDC lookback "
-                "limit: records deleted before %s cannot be captured. Run a full refresh "
-                "of this stream to remove them.",
+                "Deleted records for stream '%s' were last requested at %s, which is "
+                "older than the %s-day CDC lookback limit: records deleted before %s "
+                "cannot be captured. Run a full refresh of this stream to remove them.",
                 self.name,
                 changed_since.isoformat(),
                 CDC_MAX_LOOKBACK.days,
@@ -361,9 +496,10 @@ class QuickBooksStream(RESTStream):
 
         if len(changed) >= CDC_MAX_RESULTS:
             self.logger.warning(
-                "CDC returned the maximum of %s changed records for stream '%s' since "
-                "%s: some deleted records may be missing. Sync more often to keep the "
-                "number of changes between runs below this limit.",
+                "CDC returned the maximum of %s changed records (updates and deletes) "
+                "for stream '%s' since %s: some deleted records may be missing. Sync "
+                "more often to keep the number of changes between runs below this "
+                "limit, or run a full refresh of this stream to remove them.",
                 CDC_MAX_RESULTS,
                 self.name,
                 changed_since.isoformat(),
