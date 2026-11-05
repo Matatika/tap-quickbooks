@@ -307,6 +307,12 @@ Deleted records only carry `Id` and `MetaData`, so how they land depends on the 
 
 Check how your target handles `_sdc_deleted_at` before turning `capture_deletes` on.
 
+Consecutive runs request deletes with a few minutes of overlap, so the same deleted record can be
+emitted twice. That is harmless for targets that upsert or delete by key, but an append-only
+target gets a duplicate row. A record created and deleted between two runs is also emitted as a
+deleted record, although the destination never had it, so a target that upserts it adds a row
+with only `Id`, `MetaData` and `_sdc_deleted_at` set.
+
 Voided transactions are not deleted: QuickBooks sets their amounts to zero, and they are emitted
 as normal updates.
 
