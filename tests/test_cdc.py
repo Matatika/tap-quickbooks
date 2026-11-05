@@ -9,9 +9,11 @@ from typing import Any
 from urllib.parse import parse_qs, urlparse
 
 import pytest
+import requests
 import responses
+from singer_sdk.exceptions import FatalAPIError
 
-from tap_quickbooks.client import CDC_MAX_RESULTS, QuickBooksStream
+from tap_quickbooks.client import CDC_CHECKPOINT_KEY, CDC_MAX_RESULTS, QuickBooksStream
 from tap_quickbooks.tap import TapQuickBooks
 
 BASE_CONFIG: dict[str, Any] = {
@@ -298,3 +300,183 @@ def test_warns_when_cdc_result_limit_reached(
     _sync_messages(_tap(state=_state("invoice", bookmark)), "invoice", capsys)
 
     assert "some deleted records may be missing" in caplog.text
+
+
+# Bookmarks and CDC checkpoint
+
+PST = dt.timezone(dt.timedelta(hours=-8))
+
+
+def _sync_state(tap: TapQuickBooks, stream_name: str, capsys: pytest.CaptureFixture) -> dict:
+    _sync_messages(tap, stream_name, capsys)
+    return tap.streams[stream_name].stream_state
+
+
+@pytest.mark.parametrize("tz", [dt.timezone.utc, PST], ids=["utc", "utc-8"])
+@responses.activate
+def test_deleted_records_do_not_advance_bookmark(
+    tz: dt.tzinfo,
+    capsys: pytest.CaptureFixture,
+) -> None:
+    """A record deleted during the run does not move the bookmark past the query results.
+
+    Otherwise records updated between the query and the CDC request would be skipped, and
+    the signpost does not prevent it for non-UTC offsets as it compares strings.
+    """
+    bookmark = (_now() - dt.timedelta(days=1)).astimezone(tz).isoformat()
+    updated = (_now() - dt.timedelta(hours=2)).astimezone(tz).isoformat()
+    deleted_at = (_now() + dt.timedelta(minutes=20)).astimezone(tz).isoformat()
+    _mock_token()
+    _mock_query("Invoice", [{"Id": "1", "MetaData": {"LastUpdatedTime": updated}}])
+    _mock_cdc(
+        "Invoice",
+        [{"Id": "2", "status": "Deleted", "MetaData": {"LastUpdatedTime": deleted_at}}],
+    )
+
+    state = _sync_state(_tap(state=_state("invoice", bookmark)), "invoice", capsys)
+
+    assert state["replication_key_value"] == updated
+
+
+@responses.activate
+def test_deleted_records_only_keep_bookmark(capsys: pytest.CaptureFixture) -> None:
+    """A run that only emits deleted records leaves the bookmark unchanged."""
+    bookmark = _iso(_now() - dt.timedelta(days=1))
+    deleted_at = _iso(_now() - dt.timedelta(hours=1))
+    _mock_token()
+    _mock_query("Invoice", [])
+    _mock_cdc(
+        "Invoice",
+        [{"Id": "2", "status": "Deleted", "MetaData": {"LastUpdatedTime": deleted_at}}],
+    )
+
+    state = _sync_state(_tap(state=_state("invoice", bookmark)), "invoice", capsys)
+
+    assert state["replication_key_value"] == bookmark
+
+
+@responses.activate
+def test_first_sync_saves_cdc_checkpoint(capsys: pytest.CaptureFixture) -> None:
+    """A first sync saves a CDC checkpoint without requesting deleted records."""
+    _mock_token()
+    _mock_query("Invoice", [])
+
+    before = _now()
+    state = _sync_state(_tap(), "invoice", capsys)
+
+    assert _cdc_calls() == []
+    checkpoint = dt.datetime.fromisoformat(state[CDC_CHECKPOINT_KEY])
+    assert before - dt.timedelta(minutes=10) < checkpoint <= before
+
+
+@responses.activate
+def test_cdc_checkpoint_is_used_and_advanced(capsys: pytest.CaptureFixture) -> None:
+    """Deleted records are requested from the checkpoint, which then moves to this run."""
+    bookmark = _iso(_now() - dt.timedelta(days=60))
+    checkpoint = _iso(_now() - dt.timedelta(days=1))
+    _mock_token()
+    _mock_query("Term", [])
+    _mock_cdc("Term", [])
+
+    state = _state("term", bookmark)
+    state["bookmarks"]["term"][CDC_CHECKPOINT_KEY] = checkpoint
+    new_state = _sync_state(_tap(state=state), "term", capsys)
+
+    params = _params(_cdc_calls()[0])
+    assert dt.datetime.fromisoformat(params["changedSince"]) == dt.datetime.fromisoformat(
+        checkpoint
+    )
+    assert dt.datetime.fromisoformat(new_state[CDC_CHECKPOINT_KEY]) > _now() - dt.timedelta(
+        minutes=10
+    )
+    assert new_state["replication_key_value"] == bookmark
+
+
+@responses.activate
+def test_quiet_stream_with_recent_checkpoint_does_not_warn(
+    capsys: pytest.CaptureFixture,
+    caplog: pytest.LogCaptureFixture,
+) -> None:
+    """An old bookmark does not trigger the lookback warning when CDC ran recently."""
+    state = _state("term", _iso(_now() - dt.timedelta(days=90)))
+    state["bookmarks"]["term"][CDC_CHECKPOINT_KEY] = _iso(_now() - dt.timedelta(days=1))
+    _mock_token()
+    _mock_query("Term", [])
+    _mock_cdc("Term", [])
+
+    _sync_messages(_tap(state=state), "term", capsys)
+
+    assert "CDC lookback limit" not in caplog.text
+
+
+@pytest.mark.parametrize(
+    "error",
+    [
+        {"status": 400, "json": {"Fault": {"Error": [{"Message": "unsupported"}]}}},
+        {"body": requests.exceptions.ConnectionError("connection reset")},
+    ],
+    ids=["http-400", "connection-error"],
+)
+@responses.activate
+def test_cdc_error_does_not_fail_sync(
+    error: dict,
+    capsys: pytest.CaptureFixture,
+    caplog: pytest.LogCaptureFixture,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """A failed CDC request is logged, and its window is requested again next run."""
+    monkeypatch.setattr(QuickBooksStream, "backoff_max_tries", lambda _: 1)
+    checkpoint = _iso(_now() - dt.timedelta(days=1))
+    updated = _iso(_now() - dt.timedelta(hours=1))
+    _mock_token()
+    _mock_query("Budget", [{"Id": "1", "MetaData": {"LastUpdatedTime": updated}}])
+    responses.add(responses.GET, CDC_URL, **error)
+
+    state = _state("budget", checkpoint)
+    state["bookmarks"]["budget"][CDC_CHECKPOINT_KEY] = checkpoint
+    tap = _tap(include_inactive=False, state=state)
+    messages = _sync_messages(tap, "budget", capsys)
+
+    assert [m["record"]["Id"] for m in messages if m["type"] == "RECORD"] == ["1"]
+    assert "Could not get deleted records for stream 'budget'" in caplog.text
+    new_state = tap.streams["budget"].stream_state
+    assert new_state[CDC_CHECKPOINT_KEY] == checkpoint
+    assert new_state["replication_key_value"] == updated
+
+
+# Active filter fallback
+
+
+@responses.activate
+def test_rejected_active_filter_falls_back_to_active_records(
+    capsys: pytest.CaptureFixture,
+    caplog: pytest.LogCaptureFixture,
+) -> None:
+    """If QuickBooks rejects the Active filter, the stream syncs active records only."""
+    updated = _iso(_now() - dt.timedelta(hours=1))
+    _mock_token()
+    responses.add(
+        responses.GET,
+        QUERY_URL,
+        status=400,
+        json={"Fault": {"Error": [{"Message": "QueryValidationError: Active"}]}},
+    )
+    _mock_query("Budget", [{"Id": "1", "MetaData": {"LastUpdatedTime": updated}}])
+
+    messages = _sync_messages(_tap(capture_deletes=False), "budget", capsys)
+
+    assert [m["record"]["Id"] for m in messages if m["type"] == "RECORD"] == ["1"]
+    queries = [_params(c)["query"] for c in responses.calls if "/query" in _url(c)]
+    assert "Active IN" in queries[0]
+    assert "Active IN" not in queries[1]
+    assert "does not support filtering 'Budget' on Active" in caplog.text
+
+
+@responses.activate
+def test_query_error_without_active_filter_still_fails(capsys: pytest.CaptureFixture) -> None:
+    """A rejected query without the Active filter is still a fatal error."""
+    _mock_token()
+    responses.add(responses.GET, QUERY_URL, status=400, json={"Fault": {}})
+
+    with pytest.raises(FatalAPIError):
+        _sync_messages(_tap(include_inactive=False, capture_deletes=False), "invoice", capsys)
