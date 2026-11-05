@@ -94,6 +94,34 @@ class TapQuickBooks(Tap):
             ),
         ),
         th.Property(
+            "include_inactive",
+            th.BooleanType(nullable=False),
+            default=False,
+            title="Include Inactive",
+            description=(
+                "Whether to include inactive records for entities with an `Active` field "
+                "(such as `Customer`, `Vendor`, `Item` and `Account`), which QuickBooks "
+                "omits by default. Records deleted in the QuickBooks UI for these entities "
+                "are made inactive rather than removed. Turning this on for an existing "
+                "pipeline only emits records that change after the stream's bookmark."
+            ),
+        ),
+        th.Property(
+            "capture_deletes",
+            th.BooleanType(nullable=False),
+            default=False,
+            title="Capture Deletes",
+            description=(
+                "Whether to capture records deleted in QuickBooks, using the Change Data "
+                "Capture (CDC) endpoint. Deleted records are emitted with only `Id`, "
+                "`MetaData` and `_sdc_deleted_at` set, so the target must delete rows with "
+                "`_sdc_deleted_at` set: targets that upsert them overwrite the row's other "
+                "columns with null. Only applies to incremental streams after their first "
+                "sync, and QuickBooks only keeps 30 days of changes, so sync at least that "
+                "often."
+            ),
+        ),
+        th.Property(
             "sandbox",
             th.BooleanType(nullable=False),
             default=False,
